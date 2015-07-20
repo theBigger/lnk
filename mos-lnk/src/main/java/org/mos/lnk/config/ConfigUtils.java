@@ -1,4 +1,4 @@
-package org.mos.lnk.conf;
+package org.mos.lnk.config;
 
 import java.io.FileInputStream;
 import java.nio.charset.Charset;
@@ -13,7 +13,7 @@ import org.mos.lnk.utils.StreamUtils;
  * @version 1.0.0
  * @since 2015年6月15日 下午1:41:57
  */
-public class ConfTools {
+public class ConfigUtils {
 	
 	public static <T> T conf(Class<T> type) {
 		return conf(type, Charsets.UTF_8);

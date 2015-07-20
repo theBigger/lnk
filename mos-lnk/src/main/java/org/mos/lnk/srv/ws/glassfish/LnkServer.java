@@ -1,4 +1,4 @@
-package org.mos.lnk.srv.ws;
+package org.mos.lnk.srv.ws.glassfish;
 
 import java.util.concurrent.CountDownLatch;
 

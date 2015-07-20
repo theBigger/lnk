@@ -4,4 +4,4 @@
  * @version 1.0.0
  * @since 2015年6月15日 下午1:38:59
  */
-package org.mos.lnk.conf;
+package org.mos.lnk.config;

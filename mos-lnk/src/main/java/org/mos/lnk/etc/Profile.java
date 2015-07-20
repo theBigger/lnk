@@ -1,7 +1,7 @@
 package org.mos.lnk.etc;
 
-import org.mos.lnk.conf.ConfTools;
-import org.mos.lnk.conf.Resource;
+import org.mos.lnk.config.ConfigUtils;
+import org.mos.lnk.config.Resource;
 import org.mos.lnk.srv.Server;
 import org.mos.lnk.utils.Charsets;
 
@@ -62,7 +62,7 @@ public class Profile {
 	private int soLinger = Server.DEFAULT_OS_SOLINGER;
 	
 	public static Profile newInstance() {
-		return ConfTools.conf(Profile.class, Charsets.UTF_8);
+		return ConfigUtils.conf(Profile.class, Charsets.UTF_8);
 	}
 	
 	public int getPort() {

@@ -9,9 +9,8 @@ package org.mos.lnk.srv;
  * @since 2015年6月4日 下午4:06:17
  */
 public class ServerStarter {
-
 	public static void main(String[] args) {
-		org.mos.lnk.srv.ws.LnkServerStarter.main(args);
+		org.mos.lnk.srv.ws.glassfish.LnkServerStarter.main(args);
 		System.err.println("WS Lnk Server Started Success!!!");
 	}
 }

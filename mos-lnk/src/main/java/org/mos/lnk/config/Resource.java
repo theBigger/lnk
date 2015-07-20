@@ -1,4 +1,4 @@
-package org.mos.lnk.conf;
+package org.mos.lnk.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

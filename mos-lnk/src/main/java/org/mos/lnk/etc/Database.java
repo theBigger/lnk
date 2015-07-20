@@ -1,7 +1,7 @@
 package org.mos.lnk.etc;
 
-import org.mos.lnk.conf.ConfTools;
-import org.mos.lnk.conf.Resource;
+import org.mos.lnk.config.ConfigUtils;
+import org.mos.lnk.config.Resource;
 import org.mos.lnk.utils.Charsets;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -47,7 +47,7 @@ public class Database {
 	private String password;
 
 	public static Database newInstance() {
-		return ConfTools.conf(Database.class, Charsets.UTF_8);
+		return ConfigUtils.conf(Database.class, Charsets.UTF_8);
 	}
 
 	public String getDriverClassName() {
