@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server port="9099">
+  <core-pool-size>50</core-pool-size>
+  <maximum-pool-size>1000</maximum-pool-size>
+  <queue-size>10000</queue-size>
+  <read-timeout>30</read-timeout>
+  <charset>utf8</charset>
+  <backlog>5000</backlog>
+  <idle-time>1800</idle-time>
+  <so-linger>-1</so-linger>
+</server>

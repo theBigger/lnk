@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+	<driver>com.mysql.jdbc.Driver</driver>
+	<test-while-idle>true</test-while-idle>
+	<validation-query>SELECT 1</validation-query>
+	<validation-interval>30000</validation-interval>
+	<max-wait>10000</max-wait>
+	<jdbc-interceptors>org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer</jdbc-interceptors>
+	<url>jdbc:mysql://lnk_mysql_master:3306/mos-lnk?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;useServerPrepStmts=true&amp;useCursorFetch=true</url>
+	<username>root</username>
+	<password>abc123_</password>
+</database>

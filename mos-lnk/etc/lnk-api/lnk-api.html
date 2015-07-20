@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.0.6 (451290)"/><meta name="created" content="2015-06-04 14:52:49 +0000"/><meta name="updated" content="2015-06-19 03:51:46 +0000"/><title>lnk-api</title></head><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+<div><b><span style="font-size: 21px;">消息类型（type）</span></b></div>
+<div><span style="font-size: 18px;">心跳报文类型 ：１</span></div>
+<div><span style="font-size: 18px;">消息类型 : 2</span></div>
+<div><span style="font-size: 18px;">登录类型 : 3</span></div>
+<div><span style="font-size: 18px;">注册类型 : 4</span></div>
+<div><span style="font-size: 18px;">消息回执类型 : 5</span></div>
+<div><span style="font-size: 18px;">用户信息修改类型：6</span></div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><b style="font-size: 21px;">用户信息修改报文</b></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "mid": 123,<br/>
+  "party_id": "3",<br/>
+  "nick": "大飞哥儿1",<br/>
+  "passwd": "123456",<br/>
+  "avatar": "头像地址",<br/>
+  "weixin": "微信",<br/>
+  "qq": "QQ",<br/>
+  "email": "email",<br/>
+  "telephone": "手机号码",<br/>
+  "phone": "固话",<br/>
+  "type": 6</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><b><span style="font-size: 21px;">用户信息修改回复报文</span></b></div>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "party_id": "3",<br/>
+  "nick": "大飞哥儿1",<br/>
+  "avatar": "头像地址",<br/>
+  "weixin": "微信",<br/>
+  "qq": "QQ",<br/>
+  "email": "email",<br/>
+  "telephone": "手机号码",<br/>
+  "phone": "固话",<br/>
+  "gmt_created": 1434629069793,<br/>
+  "status": 1,<br/>
+  "mid": 123,<br/>
+  "type": 6</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">status：1 表示修改信息成功 2表示由于用户不存在等信息导致修改失败</span></span></span><b><span style="font-size: 21px;"><br/></span></b></div>
+<div><span style="font-size: 24px;"><b>注册请求报文</b></span></div>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "party_id": "3",<br/>
+  "nick": "大飞哥儿1",<br/>
+  "passwd": "123456",<br/>
+  "avatar": "头像地址",<br/>
+  "weixin": "微信",<br/>
+  "qq": "QQ",<br/>
+  "email": "email",<br/>
+  "telephone": "手机号码",<br/>
+  "phone": "固话",<br/>
+  "type": 4</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<div><span style="font-size: 21px;"><b>注册响应报文</b></span></div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "party_id": "3",<br/>
+  "nick": "大飞哥儿1",<br/>
+  "avatar": "头像地址",<br/>
+  "weixin": "微信",<br/>
+  "qq": "QQ",<br/>
+  "email": "email",<br/>
+  "telephone": "手机号码",<br/>
+  "phone": "固话",<br/>
+  "gmt_created": 1434629069809,<br/>
+  "status": 1,<br/>
+  "mid": 123,<br/>
+  "type": 4</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><span style="font-size: 21px;">其中mid是用户在聊天系统中的唯一编号，status表示本次请求处理的状态 1：成功 2：失败</span></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><b>心跳检测请求报文</b></div>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "mid": 1,<br/>
+  "type": 1</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<div><span style="font-size: 21px;"><b>心跳检测响应报文</b></span></div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "status": 1,<br/>
+  "mid": 1,<br/>
+  "type": 1</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><span style="font-size: 21px;">status表示在线状态 1：在线 2：离线</span></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><b>发送消息请求报文</b></div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "mid": 1,<br/>
+  "tid": 4,<br/>
+  "body": "你好啊",<br/>
+  "gmt_created": 1434629069824,<br/>
+  "type": 2</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><span style="font-size: 21px;">上述消息表示mid为123的用户给mid为456的用户发送消息 <span style="font-family: &amp;apos;Courier New&amp;apos;; text-align: -webkit-left;">gmt-created表示发送消息的时间的毫秒表示形式</span></span></div>
+<div style="font-size: 21px;">
+<div><span style="font-family: &amp;apos;Courier New&amp;apos;; text-align: -webkit-left;">消息发送之后的回执报文</span></div>
+</div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "status": 1,<br/>
+  "mid": 1,<br/>
+  "type": 5</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><span style="font-size: 21px;">上述的报文是给发送方一个回执 status表示发送方发送的消息状态 1：对方在线 消息成功发送  2：对方离线 带对方出席之后 会将消息推送过去 3：发送方不存在 即非法的消息</span></div>
+<div style="font-size: 21px;">
+<div><span style="font-family: &amp;apos;Courier New&amp;apos;; text-align: -webkit-left;"> 同时消息接收方将接收到的消息报文</span></div>
+</div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "party_id": "发送消息的人的第三方绑定账号",<br/>
+  "nick": "发送消息的人的昵称",<br/>
+  "avatar": "发送消息的人的头像",<br/>
+  "tid": 4,<br/>
+  "body": "你好啊",<br/>
+  "gmt_created": 1434629069824,<br/>
+  "status": 1,<br/>
+  "mid": 1,<br/>
+  "type": 2</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><span style="font-size: 21px;">上述报文表示mid为456的用户接收到了来做mid为123的用户发送过来的消息</span></div>
+<div style="font-size: 21px;">
+<div>status表示消息处理状态 1：成功</div>
+</div>
+<div style="font-size: 21px;">
+<div><b><br/>
+出席（登录）请求报文</b></div>
+</div>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "mid": 1,<br/>
+  "passwd": "123456",<br/>
+  "type": 3</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><b><span style="font-size: 21px;"><br/></span></b></div>
+<div><span style="font-size: 21px;"><b>出席（登录）响应报文</b></span></div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "status": 1,<br/>
+  "mid": 1,<br/>
+  "type": 3</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div><span style="font-size: 21px;">status表示本次出席操作结果 1：出席成功 2：出席失败</span></div>
+<div style="font-size: 21px;">出席成功之后 如果123这个用户在离线的时候有其他用户给他发送消息 那么这样的离线消息在 用户登录之后会收到一条到多条消息</div>
+<div><span style="font-size: 21px;"><br/></span></div>
+<table style="-evernote-table:true;border-collapse:collapse;width:100%;table-layout:fixed;margin-left:0px;">
+<tr>
+<td style="border-style:solid;border-width:1px;border-color:rgb(219,219,219);padding:10px;margin:0px;width:100%;">
+<div><span style="font-style: normal; font-variant: normal; font-weight: normal; line-height: normal;"><span style="font-size: 18px;"><span style="font-family: 'Courier New';">{<br/>
+  "party_id": "发送消息的人的第三方绑定账号",<br/>
+  "nick": "发送消息的人的昵称",<br/>
+  "avatar": "发送消息的人的头像",<br/>
+  "tid": 4,<br/>
+  "body": "你好啊",<br/>
+  "gmt_created": 1434629069824,<br/>
+  "status": 1,<br/>
+  "mid": 1,<br/>
+  "type": 2</span></span></span></div>
+<div><span style="font-size: 18px;"><span style="font-family: 'Courier New';">}</span></span></div>
+</td>
+</tr>
+</table>
+<div><span style="font-size: 21px;"><br/></span></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><br/></div>
+<div style="font-size: 21px;"><br/></div>
+<div><br/></div>
+</body></html>
