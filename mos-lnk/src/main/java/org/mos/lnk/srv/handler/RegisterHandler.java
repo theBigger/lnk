@@ -28,7 +28,7 @@ public class RegisterHandler extends AbstractPacketHandler<InRegister> {
 		long mid = 0;
 		try {
 			mid = userProvider.save(user);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			return outRegister.err();
 		}
 		user.online().setMid(mid);

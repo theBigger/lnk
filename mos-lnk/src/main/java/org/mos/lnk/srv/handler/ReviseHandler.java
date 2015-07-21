@@ -22,8 +22,7 @@ public class ReviseHandler extends AbstractPacketHandler<InRevise> {
 		try {
 			User user = userProvider.query(packet.getMid());
 			if (user == null) {
-				outRevise.err();
-				return outRevise;
+				return outRevise.err();
 			}
 			user.merge(packet);
 			userProvider.update(user);
