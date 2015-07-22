@@ -7,7 +7,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
 import org.mos.lnk.packet.Packet;
-import org.mos.lnk.srv.Version;
+import org.mos.lnk.server.Version;
 import org.mos.lnk.utils.ByteUtil;
 
 /**

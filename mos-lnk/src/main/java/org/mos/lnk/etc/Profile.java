@@ -2,7 +2,7 @@ package org.mos.lnk.etc;
 
 import org.mos.lnk.config.ConfigUtils;
 import org.mos.lnk.config.Resource;
-import org.mos.lnk.srv.Server;
+import org.mos.lnk.server.Server;
 import org.mos.lnk.utils.Charsets;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;

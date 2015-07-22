@@ -19,7 +19,7 @@ import org.mos.lnk.packet.OutMessage;
 import org.mos.lnk.packet.OutPresence;
 import org.mos.lnk.packet.OutRegister;
 import org.mos.lnk.packet.OutRevise;
-import org.mos.lnk.srv.Server;
+import org.mos.lnk.server.Server;
 import org.mos.lnk.utils.Charsets;
 
 /**
