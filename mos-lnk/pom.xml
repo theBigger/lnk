@@ -13,8 +13,19 @@
 		<mina.version>2.0.9</mina.version>
 		<jar.main.class>org.mos.lnk.server.ServerStarter</jar.main.class>
 	</properties>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<!--<version>2.6.1</version> -->
+			<version>2.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.glassfish.tyrus</groupId>
 			<artifactId>tyrus-server</artifactId>
