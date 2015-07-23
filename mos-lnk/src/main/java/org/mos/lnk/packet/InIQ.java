@@ -1,7 +1,5 @@
 package org.mos.lnk.packet;
 
-import org.mos.lnk.serializer.SerializerUtils;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -23,10 +21,6 @@ public class InIQ extends AbstractInPacket {
 
 	public InIQ() {
 		super(Type.IQ.type);
-	}
-
-	public static InIQ fromPacket(String packet) {
-		return SerializerUtils.currentSerializer().deserialize(InIQ.class, packet);
 	}
 
 	@Override

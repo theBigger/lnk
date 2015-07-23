@@ -2,8 +2,6 @@ package org.mos.lnk.packet;
 
 import java.util.Date;
 
-import org.mos.lnk.serializer.SerializerUtils;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -62,10 +60,6 @@ public class InRevise extends AbstractInPacket {
 
 	public InRevise() {
 		super(Type.Revise.type);
-	}
-
-	public static InRevise fromPacket(String packet) {
-		return SerializerUtils.currentSerializer().deserialize(InRevise.class, packet);
 	}
 	
 	@Override

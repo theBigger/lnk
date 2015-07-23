@@ -1,6 +1,6 @@
 package org.mos.lnk.etc;
 
-import org.mos.lnk.config.ConfigUtils;
+import org.mos.lnk.config.ConfigProvider;
 import org.mos.lnk.config.Resource;
 import org.mos.lnk.utils.Charsets;
 
@@ -47,7 +47,7 @@ public class Database {
 	private String password;
 
 	public static Database newInstance() {
-		return ConfigUtils.conf(Database.class, Charsets.UTF_8);
+		return ConfigProvider.conf(Database.class, Charsets.UTF_8);
 	}
 
 	public String getDriverClassName() {

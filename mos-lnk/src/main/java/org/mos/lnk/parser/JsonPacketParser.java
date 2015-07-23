@@ -7,6 +7,7 @@ import org.mos.lnk.packet.InPresence;
 import org.mos.lnk.packet.InRegister;
 import org.mos.lnk.packet.InRevise;
 import org.mos.lnk.packet.Type;
+import org.mos.lnk.serializer.SerializerProvider;
 
 import net.sf.json.JSONObject;
 
@@ -21,22 +22,21 @@ public class JsonPacketParser implements PacketParser {
 	@Override
 	public InPacket parse(String packet) throws Throwable {
 		JSONObject json = JSONObject.fromObject(packet);
-		int t = json.getInt("type");
-		Type type = Type.parse((byte) t);
+		Type type = Type.parse((byte) json.getInt("type"));
 		if (type == null) {
 			throw new IllegalStateException("Error Type of Packet " + packet);
 		}
 		switch (type) {
 		case IQ:
-			return InIQ.fromPacket(packet);
+			return SerializerProvider.deserialize(InIQ.class, packet);
 		case Message:
-			return InMessage.fromPacket(packet);
+			return SerializerProvider.deserialize(InMessage.class, packet);
 		case Presence:
-			return InPresence.fromPacket(packet);
+			return SerializerProvider.deserialize(InPresence.class, packet);
 		case Register:
-			return InRegister.fromPacket(packet);
+			return SerializerProvider.deserialize(InRegister.class, packet);
 		case Revise:
-			return InRevise.fromPacket(packet);
+			return SerializerProvider.deserialize(InRevise.class, packet);
 		default:
 			throw new IllegalStateException("Error Type of Packet " + packet);
 		}

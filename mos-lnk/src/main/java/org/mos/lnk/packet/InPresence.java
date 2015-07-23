@@ -1,7 +1,5 @@
 package org.mos.lnk.packet;
 
-import org.mos.lnk.serializer.SerializerUtils;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -28,10 +26,6 @@ public class InPresence extends AbstractInPacket {
 
 	public InPresence() {
 		super(Type.Presence.type);
-	}
-
-	public static InPresence fromPacket(String packet) {
-		return SerializerUtils.currentSerializer().deserialize(InPresence.class, packet);
 	}
 
 	@Override

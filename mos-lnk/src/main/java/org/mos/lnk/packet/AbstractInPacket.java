@@ -1,7 +1,7 @@
 package org.mos.lnk.packet;
 
 import org.mos.lnk.serializer.Serializer;
-import org.mos.lnk.serializer.SerializerUtils;
+import org.mos.lnk.serializer.SerializerProvider;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
@@ -36,7 +36,7 @@ public abstract class AbstractInPacket implements InPacket {
 
 	@Override
 	public Serializer serializer() {
-		return SerializerUtils.currentSerializer();
+		return SerializerProvider.currentSerializer();
 	}
 
 	/**

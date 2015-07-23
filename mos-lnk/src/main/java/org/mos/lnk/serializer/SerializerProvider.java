@@ -6,15 +6,23 @@ package org.mos.lnk.serializer;
  * @version 1.0.0
  * @since 2015年6月12日 上午10:39:18
  */
-public class SerializerUtils {
+public class SerializerProvider {
 
 	private static class SerializerHolder {
 		private static final Serializer GSON = new GsonSerializer(false);
 		private static final Serializer XSTREAM = new XStreamSerializer();
 	}
+	
+	public static <T> T deserialize(Class<T> type, String data) {
+		return SerializerProvider.currentSerializer().deserialize(type, data);
+	}
+	
+	public static String serialize(Object bean) {
+		return SerializerProvider.currentSerializer().serialize(bean);
+	}
 
 	public static Serializer currentSerializer() {
-		return SerializerUtils.gson();
+		return SerializerProvider.gson();
 	}
 	
 	public static Serializer gson() {

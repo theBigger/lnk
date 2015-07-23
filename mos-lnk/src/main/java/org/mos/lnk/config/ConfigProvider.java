@@ -3,7 +3,7 @@ package org.mos.lnk.config;
 import java.io.FileInputStream;
 import java.nio.charset.Charset;
 
-import org.mos.lnk.serializer.SerializerUtils;
+import org.mos.lnk.serializer.SerializerProvider;
 import org.mos.lnk.utils.Charsets;
 import org.mos.lnk.utils.StreamUtils;
 
@@ -13,7 +13,7 @@ import org.mos.lnk.utils.StreamUtils;
  * @version 1.0.0
  * @since 2015年6月15日 下午1:41:57
  */
-public class ConfigUtils {
+public class ConfigProvider {
 	
 	public static <T> T conf(Class<T> type) {
 		return conf(type, Charsets.UTF_8);
@@ -25,7 +25,7 @@ public class ConfigUtils {
 			if(resource == null) {
 				throw new IllegalStateException("Not found Resource on class : " + type);
 			}
-			return SerializerUtils.xstream().deserialize(type, StreamUtils.copyToString(new FileInputStream(resource.location()), charset));
+			return SerializerProvider.xstream().deserialize(type, StreamUtils.copyToString(new FileInputStream(resource.location()), charset));
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}

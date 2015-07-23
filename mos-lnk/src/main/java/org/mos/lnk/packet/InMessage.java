@@ -1,7 +1,5 @@
 package org.mos.lnk.packet;
 
-import org.mos.lnk.serializer.SerializerUtils;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -37,10 +35,6 @@ public class InMessage extends AbstractInPacket {
 
 	public InMessage() {
 		super(Type.Message.type);
-	}
-
-	public static InMessage fromPacket(String packet) {
-		return SerializerUtils.currentSerializer().deserialize(InMessage.class, packet);
 	}
 
 	@Override

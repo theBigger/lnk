@@ -2,8 +2,6 @@ package org.mos.lnk.packet;
 
 import java.util.Date;
 
-import org.mos.lnk.serializer.SerializerUtils;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -57,10 +55,6 @@ public class InRegister extends AbstractInPacket {
 
 	public InRegister() {
 		super(Type.Register.type);
-	}
-
-	public static InRegister fromPacket(String packet) {
-		return SerializerUtils.currentSerializer().deserialize(InRegister.class, packet);
 	}
 	
 	@Override
