@@ -14,11 +14,11 @@ import javax.websocket.Session;
  * @version 1.0
  * @since 2015年7月19日 上午8:32:41
  */
-public class BoundWebSocketChannel extends AbstractChannel<Session> implements WebSocketChannel {
+public class BoundJavaxWsChannel extends AbstractChannel implements JavaxWsChannel {
 
 	private Session session;
 	
-	BoundWebSocketChannel(Session session) {
+	BoundJavaxWsChannel(Session session) {
 		super();
 		this.session = session;
 	}

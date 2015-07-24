@@ -4,4 +4,4 @@
  * @version 1.0.0
  * @since 2015年6月14日 下午9:34:26
  */
-package org.mos.lnk.server.process;
+package org.mos.lnk.processor;

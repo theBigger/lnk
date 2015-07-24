@@ -18,7 +18,7 @@ import org.mos.lnk.utils.ByteUtil;
  * @version 1.0.0
  * @since 2015年6月15日 下午10:02:23
  */
-final class BoundNioSockChannel extends AbstractChannel<SocketChannel> implements NioSockChannel {
+final class BoundNioSockChannel extends AbstractChannel implements NioSockChannel {
 
 	private final Charset charset;
 

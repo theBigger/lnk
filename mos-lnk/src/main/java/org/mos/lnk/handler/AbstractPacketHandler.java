@@ -1,4 +1,4 @@
-package org.mos.lnk.server.handler;
+package org.mos.lnk.handler;
 
 import org.mos.lnk.message.DefaultMessageProvider;
 import org.mos.lnk.message.MessageProvider;

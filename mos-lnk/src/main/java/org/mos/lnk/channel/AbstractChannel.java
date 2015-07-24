@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * @since 2015年6月14日 下午5:53:26
  */
-public abstract class AbstractChannel<I> implements Channel<I> {
+public abstract class AbstractChannel implements Channel {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -25,7 +25,7 @@ public abstract class AbstractChannel<I> implements Channel<I> {
 	}
 
 	@Override
-	public AbstractChannel<I> setChannelId(long channelId) {
+	public AbstractChannel setChannelId(long channelId) {
 		if (channelId <= 0L) {
 			return this;
 		}

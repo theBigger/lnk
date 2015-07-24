@@ -13,7 +13,7 @@ import org.mos.lnk.packet.Packet;
  * @version 1.0.0
  * @since 2015年6月14日 下午12:39:39
  */
-final class BoundIoSessionChannel extends AbstractChannel<IoSession> implements IoSessionChannel {
+final class BoundIoSessionChannel extends AbstractChannel implements IoSessionChannel {
 
 	private IoSession session;
 

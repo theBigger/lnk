@@ -1,4 +1,4 @@
-package org.mos.lnk.server.handler;
+package org.mos.lnk.handler;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import org.springframework.util.CollectionUtils;
 public class PresenceHandler extends AbstractPacketHandler<InPresence> {
 
 	@Override
-	public OutPacket process(Channel<?> channel, InPresence packet) throws Throwable {
+	public OutPacket process(Channel channel, InPresence packet) throws Throwable {
 		OutPresence outPresence = packet.toOutPacket();
 		try {
 			Channels.online(channel);

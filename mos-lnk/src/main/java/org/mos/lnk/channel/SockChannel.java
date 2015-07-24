@@ -1,7 +1,5 @@
 package org.mos.lnk.channel;
 
-import java.net.Socket;
-
 /**
  * 表示一个客户端连接通道.
  * 
@@ -10,17 +8,10 @@ import java.net.Socket;
  * @version 1.0.0
  * @since 2015年6月1日 下午5:33:03
  */
-public interface SockChannel extends Channel<Socket> {
+public interface SockChannel extends Channel {
 	
 	/**
 	 * 读消息
 	 */
 	String read();
-	
-	ChannelFactory<Socket> CHANNEL_FACTORY = new ChannelFactory<Socket>() {
-		@Override
-		public SockChannel newChannel(Socket channel, ChannelHandler<Socket> handler) {
-			return new BoundSockChannel(channel, null);
-		}
-	};
 }

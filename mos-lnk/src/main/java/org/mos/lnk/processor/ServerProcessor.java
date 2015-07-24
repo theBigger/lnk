@@ -1,4 +1,4 @@
-package org.mos.lnk.server.process;
+package org.mos.lnk.processor;
 
 import org.mos.lnk.channel.Channel;
 import org.mos.lnk.packet.InPacket;
@@ -17,5 +17,5 @@ public interface ServerProcessor {
 	/**
 	 * 处理数据包接收和分发.
 	 */
-	<I extends InPacket> OutPacket process(Channel<?> channel, I packet) throws Throwable;
+	<I extends InPacket> OutPacket process(Channel channel, I packet) throws Throwable;
 }

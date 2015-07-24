@@ -1,4 +1,4 @@
-package org.mos.lnk.server.handler;
+package org.mos.lnk.handler;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mos.lnk.channel.Channel;
@@ -19,7 +19,7 @@ import org.mos.lnk.user.User;
 public class RegisterHandler extends AbstractPacketHandler<InRegister> {
 
 	@Override
-	public OutPacket process(Channel<?> channel, InRegister packet) throws Throwable {
+	public OutPacket process(Channel channel, InRegister packet) throws Throwable {
 		OutRegister outRegister = packet.toOutPacket();
 		User user = User.newInstance(packet);
 		user.setAddress(StringUtils.EMPTY);

@@ -12,9 +12,9 @@ import org.mos.lnk.etc.Profile;
 import org.mos.lnk.executor.LnkExecutor;
 import org.mos.lnk.parser.JsonPacketParser;
 import org.mos.lnk.parser.PacketParser;
+import org.mos.lnk.processor.DefaultServerProcessor;
+import org.mos.lnk.processor.ServerProcessor;
 import org.mos.lnk.server.Server;
-import org.mos.lnk.server.process.DefaultServerProcessor;
-import org.mos.lnk.server.process.ServerProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,7 +87,7 @@ final class LnkServer implements Server {
 							socket.setSoTimeout(readTimeout * 1000); // 毫秒
 							socket.setKeepAlive(true);
 							SockChannel channel = Channels.newChannel(socket, Charset.forName(charset));
-							threadPoolExecutor.execute(new ServerHandler(channel, processor, parser));
+							threadPoolExecutor.execute(new ServerIoHandler(channel, processor, parser));
 							log.error(channel + " Connection to LnkServer.");
 						} catch (Throwable t) {
 							if (server.isClosed()) {

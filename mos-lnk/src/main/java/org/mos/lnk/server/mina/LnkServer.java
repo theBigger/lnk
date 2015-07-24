@@ -15,10 +15,10 @@ import org.mos.lnk.etc.Profile;
 import org.mos.lnk.executor.LnkExecutor;
 import org.mos.lnk.parser.JsonPacketParser;
 import org.mos.lnk.parser.PacketParser;
+import org.mos.lnk.processor.DefaultServerProcessor;
+import org.mos.lnk.processor.ServerProcessor;
 import org.mos.lnk.server.Server;
 import org.mos.lnk.server.mina.codec.PacketProtocolCodecFilter;
-import org.mos.lnk.server.process.DefaultServerProcessor;
-import org.mos.lnk.server.process.ServerProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,10 +62,6 @@ final class LnkServer implements Server {
 	
 	private PacketParser parser;
 	
-	public static void main(String[] args) {
-		new LnkServer().start();
-	}
-
 	LnkServer() {
 		super();
 		try {

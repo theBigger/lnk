@@ -10,8 +10,9 @@ import org.mos.lnk.channel.NioSockChannel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.parser.PacketParser;
+import org.mos.lnk.processor.ServerProcessor;
+import org.mos.lnk.server.Handler;
 import org.mos.lnk.server.PacketProtocol;
-import org.mos.lnk.server.process.ServerProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +24,9 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * @since 2015年6月2日 上午12:08:50
  */
-final class ServerHandler implements Runnable, PacketProtocol {
+final class ServerIoHandler implements Runnable, Handler, PacketProtocol {
 
-	private static final Logger log = LoggerFactory.getLogger(ServerHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
 	private final NioSockChannel channel;
 
@@ -33,7 +34,7 @@ final class ServerHandler implements Runnable, PacketProtocol {
 
 	private final PacketParser parser;
 
-	public ServerHandler(NioSockChannel channel, ServerProcessor processor, PacketParser parser) {
+	public ServerIoHandler(NioSockChannel channel, ServerProcessor processor, PacketParser parser) {
 		super();
 		this.channel = channel;
 		this.processor = processor;

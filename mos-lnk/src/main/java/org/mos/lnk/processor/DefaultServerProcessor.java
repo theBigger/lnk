@@ -1,6 +1,11 @@
-package org.mos.lnk.server.process;
+package org.mos.lnk.processor;
 
 import org.mos.lnk.channel.Channel;
+import org.mos.lnk.handler.IQHandler;
+import org.mos.lnk.handler.MessageHandler;
+import org.mos.lnk.handler.PresenceHandler;
+import org.mos.lnk.handler.RegisterHandler;
+import org.mos.lnk.handler.ReviseHandler;
 import org.mos.lnk.packet.InIQ;
 import org.mos.lnk.packet.InMessage;
 import org.mos.lnk.packet.InPacket;
@@ -8,11 +13,6 @@ import org.mos.lnk.packet.InPresence;
 import org.mos.lnk.packet.InRegister;
 import org.mos.lnk.packet.InRevise;
 import org.mos.lnk.packet.OutPacket;
-import org.mos.lnk.server.handler.IQHandler;
-import org.mos.lnk.server.handler.MessageHandler;
-import org.mos.lnk.server.handler.PresenceHandler;
-import org.mos.lnk.server.handler.RegisterHandler;
-import org.mos.lnk.server.handler.ReviseHandler;
 
 /**
  * Lnk服务通道消息业务处理器.
@@ -44,7 +44,7 @@ public class DefaultServerProcessor implements ServerProcessor {
 	}
 
 	@Override
-	public <I extends InPacket> OutPacket process(Channel<?> channel, I packet) throws Throwable {
+	public <I extends InPacket> OutPacket process(Channel channel, I packet) throws Throwable {
 		OutPacket outPacket = null;
 		switch (packet.getPacketType()) {
 		case IQ:

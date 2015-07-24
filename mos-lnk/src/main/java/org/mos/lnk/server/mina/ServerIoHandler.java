@@ -10,7 +10,8 @@ import org.mos.lnk.channel.Channels;
 import org.mos.lnk.channel.IoSessionChannel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
-import org.mos.lnk.server.process.ServerProcessor;
+import org.mos.lnk.processor.ServerProcessor;
+import org.mos.lnk.server.Handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * @since 2015年6月10日 下午4:12:34
  */
-final class ServerIoHandler implements IoHandler {
+final class ServerIoHandler implements IoHandler, Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 

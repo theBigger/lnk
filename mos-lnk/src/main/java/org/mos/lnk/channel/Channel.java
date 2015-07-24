@@ -13,7 +13,7 @@ import org.mos.lnk.server.PacketProtocol;
  * @version 1.0.0
  * @since 2015年6月14日 下午12:59:35
  */
-public interface Channel<I> extends PacketProtocol {
+public interface Channel extends PacketProtocol {
 	/**
 	 * 获取用户通道ID
 	 */
@@ -22,12 +22,12 @@ public interface Channel<I> extends PacketProtocol {
 	/**
 	 * 注入用户通道ID
 	 */
-	Channel<I> setChannelId(long mid);
+	Channel setChannelId(long mid);
 	
 	/**
 	 * 获取通道内部包装对象
 	 */
-	I getChannel();
+	Object getChannel();
 	
 	/**
 	 * 获取客户端的地址
