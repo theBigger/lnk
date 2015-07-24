@@ -1,11 +1,11 @@
 package org.mos.lnk.handler;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mos.lnk.channel.Channel;
 import org.mos.lnk.channel.Channels;
 import org.mos.lnk.packet.InRegister;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.packet.OutRegister;
+import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.User;
 
 /**

@@ -1,8 +1,8 @@
 package org.mos.lnk.handler;
 
-import org.mos.lnk.channel.Channel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
+import org.mos.lnk.server.Channel;
 
 /**
  * 通讯数据报文处理.

@@ -1,9 +1,8 @@
-package org.mos.lnk.channel;
+package org.mos.lnk.server;
 
 import java.net.InetSocketAddress;
 
 import org.mos.lnk.packet.Packet;
-import org.mos.lnk.server.PacketProtocol;
 
 /**
  * 表示一个客户端连接通道.

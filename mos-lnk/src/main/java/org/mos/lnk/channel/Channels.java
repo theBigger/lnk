@@ -10,6 +10,7 @@ import javax.websocket.Session;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.mina.core.session.IoSession;
+import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.DefaultUserProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -71,7 +71,7 @@ final class ServerIoHandler implements Runnable, Handler, PacketProtocol {
 	}
 
 	private String read() {
-		SocketChannel channel = this.channel.getChannel();
+		SocketChannel channel = (SocketChannel) this.channel.getChannel();
 		ByteBuffer buf = ByteBuffer.allocate(READ_BYTE_BUF);
 		try {
 			while (channel.read(buf) > 0) {

@@ -1,5 +1,7 @@
 package org.mos.lnk.channel;
 
+import org.mos.lnk.server.Channel;
+
 /**
  * 基于mina的连接通道.
  * 

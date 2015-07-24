@@ -1,6 +1,5 @@
 package org.mos.lnk.processor;
 
-import org.mos.lnk.channel.Channel;
 import org.mos.lnk.handler.IQHandler;
 import org.mos.lnk.handler.MessageHandler;
 import org.mos.lnk.handler.PresenceHandler;
@@ -13,6 +12,7 @@ import org.mos.lnk.packet.InPresence;
 import org.mos.lnk.packet.InRegister;
 import org.mos.lnk.packet.InRevise;
 import org.mos.lnk.packet.OutPacket;
+import org.mos.lnk.server.Channel;
 
 /**
  * Lnk服务通道消息业务处理器.

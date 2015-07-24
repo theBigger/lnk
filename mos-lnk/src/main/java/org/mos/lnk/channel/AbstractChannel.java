@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mos.lnk.packet.Packet;
+import org.mos.lnk.server.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,8 +45,11 @@ public abstract class AbstractChannel implements Channel {
 		synchronized (this) {
 			try {
 				Channels.offline(this);
-			} catch (Throwable e) {}
-			_close();
+			} catch (Throwable e) {
+				log.error("Channel : " + this + " Close Error.", e);
+			} finally {
+				_close();
+			}
 		}
 	}
 

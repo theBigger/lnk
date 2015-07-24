@@ -1,8 +1,8 @@
 package org.mos.lnk.processor;
 
-import org.mos.lnk.channel.Channel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
+import org.mos.lnk.server.Channel;
 
 /**
  * Lnk服务通道消息业务处理器.

@@ -1,12 +1,12 @@
 package org.mos.lnk.handler;
 
-import org.mos.lnk.channel.Channel;
 import org.mos.lnk.channel.Channels;
 import org.mos.lnk.message.Message;
 import org.mos.lnk.packet.Acknowledge;
 import org.mos.lnk.packet.InMessage;
 import org.mos.lnk.packet.OutMessage;
 import org.mos.lnk.packet.OutPacket;
+import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.User;
 
 /**

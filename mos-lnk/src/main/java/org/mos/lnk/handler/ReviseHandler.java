@@ -1,9 +1,9 @@
 package org.mos.lnk.handler;
 
-import org.mos.lnk.channel.Channel;
 import org.mos.lnk.packet.InRevise;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.packet.OutRevise;
+import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.User;
 
 /**

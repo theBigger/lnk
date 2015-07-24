@@ -1,5 +1,7 @@
 package org.mos.lnk.channel;
 
+import org.mos.lnk.server.Channel;
+
 /**
  * 表示一个客户端连接通道.
  * 
