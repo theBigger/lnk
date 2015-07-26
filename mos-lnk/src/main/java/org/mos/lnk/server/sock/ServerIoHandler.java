@@ -2,7 +2,6 @@ package org.mos.lnk.server.sock;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.SockChannel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.parser.PacketParser;
@@ -23,13 +22,13 @@ final class ServerIoHandler implements Runnable, Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
-	private final SockChannel channel;
+	private final BoundChannel channel;
 
 	private final ServerProcessor processor;
 
 	private final PacketParser parser;
 
-	public ServerIoHandler(SockChannel channel, ServerProcessor processor, PacketParser parser) {
+	public ServerIoHandler(BoundChannel channel, ServerProcessor processor, PacketParser parser) {
 		super();
 		this.channel = channel;
 		this.processor = processor;
@@ -46,7 +45,7 @@ final class ServerIoHandler implements Runnable, Handler {
 					Channels.offline(channel);
 					break;
 				}
-				packet = channel.read();
+				packet = channel.received();
 				if (StringUtils.isBlank(packet)) {
 					continue;
 				}

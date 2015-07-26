@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.DefaultUserProvider;
 import org.mos.lnk.user.User;
 import org.slf4j.Logger;
@@ -34,7 +33,7 @@ public final class ChannelActiveMonitor implements Runnable {
 						Enumeration<String> channels = Channels.channels();
 						while (channels.hasMoreElements()) {
 							String mid = channels.nextElement();
-							Channel channel = Channels.channel(mid);
+							Channel<?> channel = Channels.channel(mid);
 							if (channel == null) {
 								Channels.offline(mid);
 							}

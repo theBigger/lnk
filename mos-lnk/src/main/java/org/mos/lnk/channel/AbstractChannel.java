@@ -3,8 +3,6 @@ package org.mos.lnk.channel;
 import java.net.InetSocketAddress;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mos.lnk.packet.Packet;
-import org.mos.lnk.server.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +12,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * @since 2015年6月14日 下午5:53:26
  */
-public abstract class AbstractChannel implements Channel {
+public abstract class AbstractChannel<I> implements Channel<I> {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -26,7 +24,7 @@ public abstract class AbstractChannel implements Channel {
 	}
 
 	@Override
-	public AbstractChannel setChannelId(long channelId) {
+	public AbstractChannel<I> setChannelId(long channelId) {
 		if (channelId <= 0L) {
 			return this;
 		}
@@ -35,10 +33,7 @@ public abstract class AbstractChannel implements Channel {
 	}
 
 	@Override
-	public void deliver(Packet packet, boolean closeAfterDeliver) {
-		deliver(packet);
-		if (closeAfterDeliver) close();
-	}
+	public void doAction(I channel) {}
 
 	@Override
 	public final void close() {

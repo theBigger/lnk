@@ -1,12 +1,12 @@
 package org.mos.lnk.handler;
 
+import org.mos.lnk.channel.Channel;
 import org.mos.lnk.channel.Channels;
 import org.mos.lnk.message.Message;
 import org.mos.lnk.packet.Acknowledge;
 import org.mos.lnk.packet.InMessage;
 import org.mos.lnk.packet.OutMessage;
 import org.mos.lnk.packet.OutPacket;
-import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.User;
 
 /**
@@ -20,7 +20,7 @@ import org.mos.lnk.user.User;
 public class MessageHandler extends AbstractPacketHandler<InMessage> {
 
 	@Override
-	public OutPacket process(Channel channel, InMessage packet) throws Throwable {
+	public OutPacket process(Channel<?> channel, InMessage packet) throws Throwable {
 		User user = userProvider.query(packet.getMid());
 		if (user == null) {
 			return new Acknowledge(packet.getMid()).meNotExist();
@@ -29,7 +29,7 @@ public class MessageHandler extends AbstractPacketHandler<InMessage> {
 		outMessage.setAvatar(user.getAvatar());
 		outMessage.setNick(user.getNick());
 		outMessage.setParty_id(user.getParty_id());
-		Channel peerChannel = Channels.channel(String.valueOf(packet.getTid()));
+		Channel<?> peerChannel = Channels.channel(String.valueOf(packet.getTid()));
 		if (peerChannel == null || !peerChannel.isConnect()) {
 			messageProvider.save(Message.newInstance(outMessage));
 			return new Acknowledge(packet.getMid()).peerOffline();

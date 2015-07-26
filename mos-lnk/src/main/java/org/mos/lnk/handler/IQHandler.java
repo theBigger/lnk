@@ -1,10 +1,10 @@
 package org.mos.lnk.handler;
 
+import org.mos.lnk.channel.Channel;
 import org.mos.lnk.channel.Channels;
 import org.mos.lnk.packet.InIQ;
 import org.mos.lnk.packet.OutIQ;
 import org.mos.lnk.packet.OutPacket;
-import org.mos.lnk.server.Channel;
 
 /**
  * IQ消息处理器.
@@ -17,7 +17,7 @@ import org.mos.lnk.server.Channel;
 public class IQHandler extends AbstractPacketHandler<InIQ> {
 
 	@Override
-	public OutPacket process(Channel channel, InIQ packet) throws Throwable {
+	public OutPacket process(Channel<?> channel, InIQ packet) throws Throwable {
 		OutIQ outIQ = packet.toOutPacket();
 		return Channels.isOnline(packet.getMid()) ? outIQ.online() : outIQ.offline();
 	}

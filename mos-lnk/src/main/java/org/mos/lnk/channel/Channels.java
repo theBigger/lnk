@@ -1,16 +1,9 @@
 package org.mos.lnk.channel;
 
-import java.net.Socket;
-import java.nio.channels.SelectionKey;
-import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.websocket.Session;
-
 import org.apache.commons.lang3.StringUtils;
-import org.apache.mina.core.session.IoSession;
-import org.mos.lnk.server.Channel;
 import org.mos.lnk.user.DefaultUserProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,29 +20,13 @@ public class Channels {
 
 	private final static Logger log = LoggerFactory.getLogger(Channels.class);
 
-	private static final ConcurrentHashMap<String, Channel> channels = new ConcurrentHashMap<String, Channel>(2000);
-
-	public static SockChannel newChannel(Socket channel, Charset charset) {
-		return new BoundSockChannel(channel, charset);
-	}
-	
-	public static IoSessionChannel newChannel(IoSession session) {
-		return new BoundIoSessionChannel(session);
-	}
-	
-	public static NioSockChannel newChannel(SelectionKey key, Charset charset) {
-		return new BoundNioSockChannel(key, charset);
-	}
-	
-	public static JavaxWsChannel newChannel(Session session) {
-		return new BoundJavaxWsChannel(session);
-	}
+	private static final ConcurrentHashMap<String, Channel<?>> channels = new ConcurrentHashMap<String, Channel<?>>(2000);
 	
 	public static Enumeration<String> channels() {
 		return Channels.channels.keys();
 	}
 
-	public static void online(Channel channel) {
+	public static void online(Channel<?> channel) {
 		String mid = channel.getChannelId();
 		if (StringUtils.isBlank(mid)) {
 			return;
@@ -63,7 +40,7 @@ public class Channels {
 
 	}
 
-	public static void offline(Channel channel) {
+	public static void offline(Channel<?> channel) {
 		String mid = channel.getChannelId();
 		if (StringUtils.isBlank(mid)) {
 			return;
@@ -87,12 +64,12 @@ public class Channels {
 		Channels.offline(String.valueOf(mid));
 	}
 
-	public static Channel channel(String mid) {
+	public static Channel<?> channel(String mid) {
 		return Channels.channels.get(mid);
 	}
 
 	public static boolean isOnline(String mid) {
-		Channel channel = Channels.channel(mid);
+		Channel<?> channel = Channels.channel(mid);
 		return channel != null && channel.isConnect();
 	}
 
@@ -100,7 +77,7 @@ public class Channels {
 		return Channels.isOnline(String.valueOf(mid));
 	}
 
-	public static boolean isOnline(Channel channel) {
+	public static boolean isOnline(Channel<?> channel) {
 		String mid = channel.getChannelId();
 		if (StringUtils.isBlank(mid)) {
 			return false;

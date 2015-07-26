@@ -6,8 +6,6 @@ import java.nio.charset.Charset;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.mos.lnk.channel.ChannelActiveMonitor;
-import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.SockChannel;
 import org.mos.lnk.etc.Profile;
 import org.mos.lnk.executor.LnkExecutor;
 import org.mos.lnk.parser.JsonPacketParser;
@@ -86,7 +84,7 @@ final class LnkServer implements Server {
 							Socket socket = server.accept();
 							socket.setSoTimeout(readTimeout * 1000); // 毫秒
 							socket.setKeepAlive(true);
-							SockChannel channel = Channels.newChannel(socket, Charset.forName(charset));
+							BoundChannel channel = new BoundChannel(socket, Charset.forName(charset));
 							threadPoolExecutor.execute(new ServerIoHandler(channel, processor, parser));
 							log.error(channel + " Connection to LnkServer.");
 						} catch (Throwable t) {

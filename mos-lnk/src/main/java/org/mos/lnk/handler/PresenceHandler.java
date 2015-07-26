@@ -2,13 +2,13 @@ package org.mos.lnk.handler;
 
 import java.util.List;
 
+import org.mos.lnk.channel.Channel;
 import org.mos.lnk.channel.Channels;
 import org.mos.lnk.message.Message;
 import org.mos.lnk.packet.InPresence;
 import org.mos.lnk.packet.OutMessage;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.packet.OutPresence;
-import org.mos.lnk.server.Channel;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -22,7 +22,7 @@ import org.springframework.util.CollectionUtils;
 public class PresenceHandler extends AbstractPacketHandler<InPresence> {
 
 	@Override
-	public OutPacket process(Channel channel, InPresence packet) throws Throwable {
+	public OutPacket process(Channel<?> channel, InPresence packet) throws Throwable {
 		OutPresence outPresence = packet.toOutPacket();
 		try {
 			Channels.online(channel);

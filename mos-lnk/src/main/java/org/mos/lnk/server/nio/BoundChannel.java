@@ -1,4 +1,4 @@
-package org.mos.lnk.channel;
+package org.mos.lnk.server.nio;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -6,6 +6,8 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
+import org.mos.lnk.channel.AbstractChannel;
+import org.mos.lnk.channel.Channels;
 import org.mos.lnk.packet.Packet;
 import org.mos.lnk.server.Version;
 import org.mos.lnk.utils.ByteUtil;
@@ -18,7 +20,7 @@ import org.mos.lnk.utils.ByteUtil;
  * @version 1.0.0
  * @since 2015年6月15日 下午10:02:23
  */
-final class BoundNioSockChannel extends AbstractChannel implements NioSockChannel {
+final class BoundChannel extends AbstractChannel<SelectionKey> {
 
 	private final Charset charset;
 
@@ -26,7 +28,7 @@ final class BoundNioSockChannel extends AbstractChannel implements NioSockChanne
 
 	private SocketChannel channel;
 
-	BoundNioSockChannel(SelectionKey key, Charset charset) {
+	BoundChannel(SelectionKey key, Charset charset) {
 		super();
 		this.key = key;
 		this.channel = (SocketChannel) key.channel();
@@ -34,8 +36,24 @@ final class BoundNioSockChannel extends AbstractChannel implements NioSockChanne
 	}
 
 	@Override
-	public SocketChannel getChannel() {
-		return channel;
+	public SelectionKey getChannel() {
+		return key;
+	}
+
+	@Override
+	public String received() {
+		ByteBuffer buf = ByteBuffer.allocate(READ_BYTE_BUF);
+		try {
+			while (channel.read(buf) > 0) {
+				buf.flip();
+				// buf.get(dst, offset, length);
+			}
+		} catch (Throwable e) {
+			log.error("ServerHandler read Message Error.", e);
+		} finally {
+			key.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+		}
+		return null;
 	}
 
 	@Override
@@ -70,14 +88,8 @@ final class BoundNioSockChannel extends AbstractChannel implements NioSockChanne
 			} catch (Throwable e) {
 			}
 		} finally {
-			interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+			key.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 		}
-	}
-
-	@Override
-	public BoundNioSockChannel interestOps(int ops) {
-		key.interestOps(ops);
-		return this;
 	}
 
 	@Override

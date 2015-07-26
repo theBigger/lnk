@@ -12,8 +12,6 @@ import java.util.Iterator;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.mos.lnk.channel.ChannelActiveMonitor;
-import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.NioSockChannel;
 import org.mos.lnk.etc.Profile;
 import org.mos.lnk.executor.LnkExecutor;
 import org.mos.lnk.parser.JsonPacketParser;
@@ -102,7 +100,7 @@ class LnkServer implements Server {
 									channel.configureBlocking(false);
 									channel.register(selector, SelectionKey.OP_READ);
 								} else if (key.isReadable()) {
-									NioSockChannel channel = Channels.newChannel(key, Charset.forName(charset));
+									BoundChannel channel = new BoundChannel(key, Charset.forName(charset));
 									threadPoolExecutor.execute(new ServerIoHandler(channel, processor, parser));
 									log.error(channel + " Connection to LnkServer.");
 								}

@@ -1,8 +1,8 @@
 package org.mos.lnk.handler;
 
+import org.mos.lnk.channel.Channel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
-import org.mos.lnk.server.Channel;
 
 /**
  * 通讯数据报文处理.
@@ -13,5 +13,5 @@ import org.mos.lnk.server.Channel;
  * @since 2015年6月2日 下午7:15:56
  */
 public interface PacketHandler<I extends InPacket> {
-	OutPacket process(Channel channel, I packet) throws Throwable;
+	OutPacket process(Channel<?> channel, I packet) throws Throwable;
 }

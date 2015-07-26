@@ -7,7 +7,6 @@ import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.SockChannel;
 import org.mos.lnk.packet.Acknowledge;
 import org.mos.lnk.packet.InIQ;
 import org.mos.lnk.packet.InMessage;
@@ -51,27 +50,6 @@ public class Client {
 		int bytesRead = sourceChannel.read(r);
 		
 //		java.nio.channels.Channels.newChannel(null);
-	}
-
-	public static void main1234(String[] args) throws Exception {
-//		Socket socket = new Socket("127.0.0.1", Server.DEFAULT_PORT);
-		Socket socket = new Socket("wjz", Server.DEFAULT_PORT);
-		socket.setKeepAlive(true);
-		socket.setSoTimeout(30000);
-		SockChannel channel = Channels.newChannel(socket, Charsets.UTF_8);
-//		channel.deliver(newInIQ());
-//		channel.deliver(newInRegister());
-		channel.deliver(newInPresence());
-//		channel.deliver(newInMessage());
-//		System.out.println("1 登录");
-		System.out.println("2 登录 并给1发消息");
-		while (true) {
-			String response = channel.read();
-			if (StringUtils.isBlank(response)) {
-				continue;
-			}
-			System.err.println("收到消息 : " + response);
-		}
 	}
 
 	public static InMessage newInMessage() {

@@ -1,12 +1,7 @@
 package org.mos.lnk.server.nio;
 
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
-
 import org.apache.commons.lang3.StringUtils;
 import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.NioSockChannel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.parser.PacketParser;
@@ -28,13 +23,13 @@ final class ServerIoHandler implements Runnable, Handler, PacketProtocol {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
-	private final NioSockChannel channel;
+	private final BoundChannel channel;
 
 	private final ServerProcessor processor;
 
 	private final PacketParser parser;
 
-	public ServerIoHandler(NioSockChannel channel, ServerProcessor processor, PacketParser parser) {
+	public ServerIoHandler(BoundChannel channel, ServerProcessor processor, PacketParser parser) {
 		super();
 		this.channel = channel;
 		this.processor = processor;
@@ -50,7 +45,7 @@ final class ServerIoHandler implements Runnable, Handler, PacketProtocol {
 				Channels.offline(channel);
 				return;
 			}
-			packet = read();
+			packet = channel.received();
 			if (StringUtils.isBlank(packet)) {
 				return;
 			}
@@ -68,21 +63,5 @@ final class ServerIoHandler implements Runnable, Handler, PacketProtocol {
 		} catch (Throwable e) {
 			log.error("Nio ServerHandler Error.");
 		}
-	}
-
-	private String read() {
-		SocketChannel channel = (SocketChannel) this.channel.getChannel();
-		ByteBuffer buf = ByteBuffer.allocate(READ_BYTE_BUF);
-		try {
-			while (channel.read(buf) > 0) {
-				buf.flip();
-				// buf.get(dst, offset, length);
-			}
-		} catch (Throwable e) {
-			log.error("ServerHandler read Message Error.", e);
-		} finally {
-			this.channel.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-		}
-		return null;
 	}
 }

@@ -1,26 +1,31 @@
-package org.mos.lnk.channel;
+package org.mos.lnk.server.ws.glassfish;
 
 import java.net.InetSocketAddress;
 
 import javax.websocket.CloseReason;
 import javax.websocket.CloseReason.CloseCodes;
-
-import org.mos.lnk.packet.Packet;
-
 import javax.websocket.Session;
+
+import org.mos.lnk.channel.AbstractChannel;
+import org.mos.lnk.packet.Packet;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
  * @version 1.0
  * @since 2015年7月19日 上午8:32:41
  */
-public class BoundJavaxWsChannel extends AbstractChannel implements JavaxWsChannel {
+final class BoundChannel extends AbstractChannel<Session> {
 
 	private Session session;
-	
-	BoundJavaxWsChannel(Session session) {
+
+	BoundChannel(Session session) {
 		super();
 		this.session = session;
+	}
+
+	@Override
+	public String received() {
+		throw new UnsupportedOperationException("'Session' Unsupported Received Message!!!");
 	}
 
 	@Override

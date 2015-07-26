@@ -1,4 +1,4 @@
-package org.mos.lnk.channel;
+package org.mos.lnk.server.sock;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -6,6 +6,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.Charset;
 
+import org.mos.lnk.channel.AbstractChannel;
+import org.mos.lnk.channel.Channels;
 import org.mos.lnk.packet.Packet;
 import org.mos.lnk.server.Version;
 import org.mos.lnk.utils.ByteUtil;
@@ -18,7 +20,7 @@ import org.mos.lnk.utils.ByteUtil;
  * @version 1.0.0
  * @since 2015年6月1日 下午5:51:34
  */
-final class BoundSockChannel extends AbstractChannel implements SockChannel {
+final class BoundChannel extends AbstractChannel<Socket> {
 
 	private final Charset charset;
 
@@ -28,7 +30,7 @@ final class BoundSockChannel extends AbstractChannel implements SockChannel {
 
 	private OutputStream out;
 
-	public BoundSockChannel(Socket channel, Charset charset) {
+	public BoundChannel(Socket channel, Charset charset) {
 		super();
 		this.channel = channel;
 		this.charset = charset;
@@ -54,7 +56,7 @@ final class BoundSockChannel extends AbstractChannel implements SockChannel {
 	}
 
 	@Override
-	public String read() {
+	public String received() {
 		try {
 			byte[] headBytes = new byte[HEAD_BYTE_LENGTH];
 			in.mark(HEAD_BYTE_LENGTH);

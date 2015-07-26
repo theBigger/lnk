@@ -1,8 +1,9 @@
-package org.mos.lnk.server;
+package org.mos.lnk.channel;
 
 import java.net.InetSocketAddress;
 
 import org.mos.lnk.packet.Packet;
+import org.mos.lnk.server.PacketProtocol;
 
 /**
  * 表示一个客户端连接通道.
@@ -12,7 +13,7 @@ import org.mos.lnk.packet.Packet;
  * @version 1.0.0
  * @since 2015年6月14日 下午12:59:35
  */
-public interface Channel extends PacketProtocol {
+public interface Channel<I> extends PacketProtocol {
 	/**
 	 * 获取用户通道ID
 	 */
@@ -21,12 +22,17 @@ public interface Channel extends PacketProtocol {
 	/**
 	 * 注入用户通道ID
 	 */
-	Channel setChannelId(long mid);
+	Channel<I> setChannelId(long mid);
 	
 	/**
 	 * 获取通道内部包装对象
 	 */
-	Object getChannel();
+	I getChannel();
+	
+	/**
+	 * 对通道对象执行操作
+	 */
+	void doAction(I channel);
 	
 	/**
 	 * 获取客户端的地址
@@ -34,14 +40,14 @@ public interface Channel extends PacketProtocol {
 	InetSocketAddress getPeerAddress();
 	
 	/**
-	 * 将消息投递到通道
+	 * 接收消息
 	 */
-	void deliver(Packet packet);
+	String received();
 	
 	/**
 	 * 将消息投递到通道
 	 */
-	void deliver(Packet packet, boolean closeAfterDeliver);
+	void deliver(Packet packet);
 
 	/**
 	 * 通道是否处于连接状态

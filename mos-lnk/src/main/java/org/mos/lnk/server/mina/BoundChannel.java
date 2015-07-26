@@ -1,8 +1,9 @@
-package org.mos.lnk.channel;
+package org.mos.lnk.server.mina;
 
 import java.net.InetSocketAddress;
 
 import org.apache.mina.core.session.IoSession;
+import org.mos.lnk.channel.AbstractChannel;
 import org.mos.lnk.packet.Packet;
 
 /**
@@ -13,16 +14,21 @@ import org.mos.lnk.packet.Packet;
  * @version 1.0.0
  * @since 2015年6月14日 下午12:39:39
  */
-final class BoundIoSessionChannel extends AbstractChannel implements IoSessionChannel {
+final class BoundChannel extends AbstractChannel<IoSession> {
 
 	private IoSession session;
 
 	private boolean closed;
 
-	BoundIoSessionChannel(IoSession session) {
+	BoundChannel(IoSession session) {
 		super();
 		this.session = session;
 		this.closed = false;
+	}
+
+	@Override
+	public String received() {
+		throw new UnsupportedOperationException("'IoSession' Unsupported Received Message!!!");
 	}
 
 	@Override

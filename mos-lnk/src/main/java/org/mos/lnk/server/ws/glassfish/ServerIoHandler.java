@@ -10,8 +10,6 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.JavaxWsChannel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.parser.JsonPacketParser;
@@ -46,13 +44,13 @@ public final class ServerIoHandler implements Handler {
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig config) {
-		JavaxWsChannel channel = Channels.newChannel(session);
+		BoundChannel channel = new BoundChannel(session);
 		session.getUserProperties().put(IO_CHANNEL, channel);
 	}
 
 	@OnMessage
 	public String onMessage(String message, Session session) {
-		JavaxWsChannel channel = (JavaxWsChannel) session.getUserProperties().get(IO_CHANNEL);
+		BoundChannel channel = (BoundChannel) session.getUserProperties().get(IO_CHANNEL);
 		try {
 			InPacket inPacket = parser.parse(message);
 			channel.setChannelId(inPacket.getMid());
@@ -69,13 +67,13 @@ public final class ServerIoHandler implements Handler {
 	
 	@OnError
 	public void onError(Session session, Throwable t) {
-		JavaxWsChannel channel = (JavaxWsChannel) session.getUserProperties().get(IO_CHANNEL);
+		BoundChannel channel = (BoundChannel) session.getUserProperties().get(IO_CHANNEL);
 		log.error("ServerIoHandler: Channel Error.\n" + channel, t);
 	}
 
 	@OnClose
 	public void onClose(Session session, CloseReason closeReason) {
-		JavaxWsChannel channel = (JavaxWsChannel) session.getUserProperties().get(IO_CHANNEL);
+		BoundChannel channel = (BoundChannel) session.getUserProperties().get(IO_CHANNEL);
 		log.error("ServerIoHandler: Closing channel due to session Closed: " + channel);
 		channel.close();
 	}

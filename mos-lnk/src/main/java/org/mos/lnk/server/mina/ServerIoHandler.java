@@ -6,8 +6,6 @@ import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolDecoderException;
-import org.mos.lnk.channel.Channels;
-import org.mos.lnk.channel.IoSessionChannel;
 import org.mos.lnk.packet.InPacket;
 import org.mos.lnk.packet.OutPacket;
 import org.mos.lnk.processor.ServerProcessor;
@@ -43,13 +41,13 @@ final class ServerIoHandler implements IoHandler, Handler {
 
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
-		IoSessionChannel channel = Channels.newChannel(session);
+		BoundChannel channel = new BoundChannel(session);
 		session.setAttribute(NIO_CHANNEL, channel);
 	}
 
 	@Override
 	public void messageReceived(IoSession session, Object message) throws Exception {
-		IoSessionChannel channel = (IoSessionChannel) session.getAttribute(NIO_CHANNEL);
+		BoundChannel channel = (BoundChannel) session.getAttribute(NIO_CHANNEL);
 		try {
 			InPacket inPacket = (InPacket) message;
 			channel.setChannelId(inPacket.getMid());
@@ -70,7 +68,7 @@ final class ServerIoHandler implements IoHandler, Handler {
 
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
-		IoSessionChannel channel = (IoSessionChannel) session.getAttribute(NIO_CHANNEL);
+		BoundChannel channel = (BoundChannel) session.getAttribute(NIO_CHANNEL);
 		log.error("ServerIoHandler: Closing channel due to session Closed: " + channel);
 		channel.close();
 	}
@@ -78,7 +76,7 @@ final class ServerIoHandler implements IoHandler, Handler {
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
 		if (session.getIdleCount(status) > 1) {
-			final IoSessionChannel channel = (IoSessionChannel) session.getAttribute(NIO_CHANNEL);
+			final BoundChannel channel = (BoundChannel) session.getAttribute(NIO_CHANNEL);
 			log.error("ServerIoHandler: Closing channel that has been idle: " + channel);
 			channel.close();
 		}
@@ -90,7 +88,7 @@ final class ServerIoHandler implements IoHandler, Handler {
 			log.error("ServerIoHandler reports IOException for session: " + session, cause);
 		} else if (cause instanceof ProtocolDecoderException) {
 			log.error("Closing channel due to exception: " + session, cause);
-			final IoSessionChannel channel = (IoSessionChannel) session.getAttribute(NIO_CHANNEL);
+			final BoundChannel channel = (BoundChannel) session.getAttribute(NIO_CHANNEL);
 			channel.close();
 		} else {
 			log.error("ServerIoHandler reports unexpected exception for session: " + session, cause);
@@ -99,7 +97,7 @@ final class ServerIoHandler implements IoHandler, Handler {
 
 	@Override
 	public void inputClosed(IoSession session) throws Exception {
-		final IoSessionChannel channel = (IoSessionChannel) session.getAttribute(NIO_CHANNEL);
+		final BoundChannel channel = (BoundChannel) session.getAttribute(NIO_CHANNEL);
 		log.error("ServerIoHandler: Closing channel due to input Closed: " + channel);
 		channel.close();
 	}
