@@ -26,12 +26,12 @@
 			document.getElementById('messages').innerHTML += '<br/>' + event.data;
 		};
 		ws.onerror = function(event) {
-			console.log("WebSocket.onerror event : " + event.data);
-			alert(event.data);
+			console.log("WebSocket.onerror event : " + event);
+			alert("WebSocket.onerror event : " + event);
 		};
 		ws.onclose = function(event) {
-			console.log("WebSocket.onclose event : " + event.data);
-			alert(event.data);
+			console.log("WebSocket.onclose event : " + event);
+			alert("WebSocket.onclose event : " + event);
 		};
 		function start() {
 			send('{"mid":1,"type":1}');
