@@ -6,20 +6,21 @@ import java.nio.channels.Pipe;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mos.lnk.channel.Channels;
-import org.mos.lnk.packet.Acknowledge;
-import org.mos.lnk.packet.InIQ;
-import org.mos.lnk.packet.InMessage;
-import org.mos.lnk.packet.InPresence;
-import org.mos.lnk.packet.InRegister;
-import org.mos.lnk.packet.InRevise;
-import org.mos.lnk.packet.OutIQ;
-import org.mos.lnk.packet.OutMessage;
-import org.mos.lnk.packet.OutPresence;
-import org.mos.lnk.packet.OutRegister;
-import org.mos.lnk.packet.OutRevise;
-import org.mos.lnk.server.Server;
-import org.mos.lnk.utils.Charsets;
+
+import me.mos.lnk.channel.Channels;
+import me.mos.lnk.packet.Acknowledge;
+import me.mos.lnk.packet.InIQ;
+import me.mos.lnk.packet.InMessage;
+import me.mos.lnk.packet.InPresence;
+import me.mos.lnk.packet.InRegister;
+import me.mos.lnk.packet.InRevise;
+import me.mos.lnk.packet.OutIQ;
+import me.mos.lnk.packet.OutMessage;
+import me.mos.lnk.packet.OutPresence;
+import me.mos.lnk.packet.OutRegister;
+import me.mos.lnk.packet.OutRevise;
+import me.mos.lnk.server.Server;
+import me.mos.lnk.utils.Charsets;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
