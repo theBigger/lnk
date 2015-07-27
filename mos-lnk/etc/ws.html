@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>WebSocket</title>
+</head>
+<body>
+	<div>
+		<input type="submit" value="start" onclick="start()" />
+	</div>
+	<div id="messages"></div>
+	<script type="text/javascript">
+		var ws;
+		if (!window.WebSocket) {
+			window.WebSocket = window.MozWebSocket;
+		}
+		if (window.WebSocket) {
+			ws = new WebSocket("ws://120.24.228.100:9099/ws/lnk");
+		}
+		ws.onopen = function(event) {
+			document.getElementById('messages').innerHTML = 'Connection established<br/>';
+			console.log("WebSocket.readyState : " + ws.readyState);
+			console.log("WebSocket.onopen event : " + event);
+		};
+		ws.onmessage = function(event) {
+			console.log("WebSocket.onmessage event : " + event.data);
+			document.getElementById('messages').innerHTML += '<br/>' + event.data;
+		};
+		ws.onerror = function(event) {
+			console.log("WebSocket.onerror event : " + event.data);
+			alert(event.data);
+		};
+		ws.onclose = function(event) {
+			console.log("WebSocket.onclose event : " + event.data);
+			alert(event.data);
+		};
+		function start() {
+			send('{"mid":1,"type":1}');
+			return false;
+		}
+		function send(message) {
+			if (!window.WebSocket) {
+				return;
+			}
+			if (ws.readyState == WebSocket.OPEN) {
+				ws.send(message);
+			} else {
+				alert("The socket is not open.");
+			}
+		}
+	</script>
+</body>
+</html>
