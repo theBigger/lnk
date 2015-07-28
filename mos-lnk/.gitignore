@@ -4,5 +4,6 @@
 /bin
 /lnk/
 /.settings
+.settings/
 .classpath
 .project
