@@ -22,13 +22,13 @@
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-util/9.3.1.v20150714/jetty-util-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-servlet/9.3.1.v20150714/jetty-servlet-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-security/9.3.1.v20150714/jetty-security-9.3.1.v20150714.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-server/9.3.1.v20150714/jetty-server-9.3.1.v20150714.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-server/9.3.1.v20150714/jetty-server-9.3.1.v20150714-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-server/9.3.1.v20150714/jetty-server-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-http/9.3.1.v20150714/jetty-http-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-io/9.3.1.v20150714/jetty-io-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-jndi/9.3.1.v20150714/jetty-jndi-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-client-impl/9.3.1.v20150714/javax-websocket-client-impl-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-client/9.3.1.v20150714/websocket-client-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-common/9.3.1.v20150714/websocket-common-9.3.1.v20150714.jar"/>
