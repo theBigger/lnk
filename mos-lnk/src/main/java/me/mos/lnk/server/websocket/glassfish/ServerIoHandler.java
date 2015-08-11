@@ -37,7 +37,7 @@ public final class ServerIoHandler implements Handler {
 
 	private final PacketParser parser;
 
-	public ServerIoHandler() {
+	ServerIoHandler() {
 		super();
 		processor = new DefaultServerProcessor();
 		parser = new JsonPacketParser();

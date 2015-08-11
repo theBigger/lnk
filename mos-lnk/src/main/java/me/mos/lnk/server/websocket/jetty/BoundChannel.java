@@ -2,7 +2,11 @@ package me.mos.lnk.server.websocket.jetty;
 
 import java.net.InetSocketAddress;
 
+import org.eclipse.jetty.websocket.api.CloseStatus;
 import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.websocket.api.StatusCode;
+import org.eclipse.jetty.websocket.common.ConnectionState;
+import org.eclipse.jetty.websocket.common.WebSocketSession;
 
 import me.mos.lnk.channel.AbstractChannel;
 import me.mos.lnk.packet.Packet;
@@ -44,14 +48,15 @@ public class BoundChannel extends AbstractChannel<Session> {
 
 	@Override
 	public boolean isConnect() {
-		return session.isOpen();
+		ConnectionState state = ((WebSocketSession) session).getConnection().getIOState().getConnectionState();
+		return session.isOpen() && (state == ConnectionState.CONNECTED);
 	}
 
 	@Override
 	protected void _close() {
 		try {
 			session.disconnect();
-			session.close();
+			session.close(new CloseStatus(StatusCode.NORMAL, "离线"));
 		} catch (Throwable e) {
 			log.error(toString() + " Offline Error.", e);
 		}
