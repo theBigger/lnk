@@ -4,4 +4,4 @@
  * @version 1.0
  * @since 2015年7月20日 下午11:35:12
  */
-package me.mos.lnk.server.ws.netty;
+package me.mos.lnk.server.websocket.netty;

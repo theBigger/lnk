@@ -4,4 +4,4 @@
  * @version 1.0
  * @since 2015年7月20日 下午11:34:06
  */
-package me.mos.lnk.server.ws.glassfish;
+package me.mos.lnk.server.websocket.glassfish;

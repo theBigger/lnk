@@ -1,4 +1,4 @@
-package me.mos.lnk.server.ws.glassfish;
+package me.mos.lnk.server.websocket.glassfish;
 
 import java.net.InetSocketAddress;
 
@@ -16,7 +16,7 @@ import me.mos.lnk.packet.Packet;
  */
 final class BoundChannel extends AbstractChannel<Session> {
 
-	private Session session;
+	private final Session session;
 
 	BoundChannel(Session session) {
 		super();

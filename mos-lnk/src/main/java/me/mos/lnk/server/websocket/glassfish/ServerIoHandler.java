@@ -1,4 +1,4 @@
-package me.mos.lnk.server.ws.glassfish;
+package me.mos.lnk.server.websocket.glassfish;
 
 import javax.websocket.CloseReason;
 import javax.websocket.EndpointConfig;

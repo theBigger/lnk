@@ -1,4 +1,4 @@
-package me.mos.lnk.server.ws.glassfish;
+package me.mos.lnk.server.websocket.glassfish;
 
 import java.util.concurrent.CountDownLatch;
 

@@ -10,7 +10,7 @@ package me.mos.lnk.server;
  */
 public class ServerStarter {
 	public static void main(String[] args) {
-		me.mos.lnk.server.ws.glassfish.LnkServerStarter.main(args);
+		me.mos.lnk.server.websocket.glassfish.LnkServerStarter.main(args);
 		System.err.println("WS Lnk Server Started Success!!!");
 	}
 }
