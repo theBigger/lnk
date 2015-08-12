@@ -27,8 +27,6 @@ public class LnkServer implements Server {
 
 	private int port = DEFAULT_PORT;
 
-	private ServerBootstrap server;
-	
 	private Channel channel;
 	
 	private Profile profile;
@@ -74,6 +72,7 @@ public class LnkServer implements Server {
 	@Override
 	public void stop() {
 		try {
+		    channel.disconnect();
 			channel.close();
 			channel = null;
 		} catch (Exception e) {

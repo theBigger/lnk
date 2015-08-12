@@ -48,6 +48,7 @@ final class BoundChannel extends AbstractChannel<Channel> {
 
 	@Override
 	protected void _close() {
+	    channel.disconnect();
 		channel.close();
 	}
 }
