@@ -10,7 +10,6 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.apache.commons.lang3.StringUtils;
-import org.glassfish.tyrus.core.SessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +46,7 @@ public final class ServerIoHandler implements Handler {
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig config) {
-		BoundChannel channel = new BoundChannel((SessionImpl) session);
+		BoundChannel channel = new BoundChannel(session);
 		session.getUserProperties().put(IO_CHANNEL, channel);
 	}
 
@@ -69,9 +68,8 @@ public final class ServerIoHandler implements Handler {
 	}
 	
 	@OnError
-	public void onError(Session session, Throwable t) {
-		BoundChannel channel = (BoundChannel) session.getUserProperties().get(IO_CHANNEL);
-		log.error("ServerIoHandler: Channel Error.\n" + channel, t);
+	public void onError(Throwable t) {
+		log.error("ServerIoHandler: Channel Error.", t);
 	}
 
 	@OnClose
