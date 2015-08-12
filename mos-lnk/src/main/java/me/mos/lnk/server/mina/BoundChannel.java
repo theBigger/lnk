@@ -29,7 +29,7 @@ final class BoundChannel extends AbstractChannel<IoSession> {
 
 	@Override
 	public String received() {
-		throw new UnsupportedOperationException("'IoSession' Unsupported Received Message!!!");
+		throw new UnsupportedOperationException("'org.apache.mina.core.session.IoSession' Unsupported Received Message!!!");
 	}
 
 	@Override

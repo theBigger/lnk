@@ -72,7 +72,7 @@
 			window.WebSocket = window.MozWebSocket;
 		}
 		if (window.WebSocket) {
-			ws = new WebSocket("ws://120.24.228.100:9099/ws/lnk");
+			ws = new WebSocket("ws://120.24.228.100:9099");
 		}
 		ws.onopen = function(event) {
 			document.getElementById('messages').innerHTML = 'Connection established<br/>';

@@ -15,7 +15,7 @@ import me.mos.lnk.packet.Packet;
  * @version 1.0.0
  * @since 2015年8月11日 下午5:32:07
  */
-public class BoundChannel extends AbstractChannel<JsrSession> {
+final class BoundChannel extends AbstractChannel<JsrSession> {
 	
 	private final JsrSession session;
 
@@ -36,7 +36,7 @@ public class BoundChannel extends AbstractChannel<JsrSession> {
 
 	@Override
 	public String received() {
-		throw new UnsupportedOperationException("'Session' Unsupported Received Message!!!");
+		throw new UnsupportedOperationException("'org.eclipse.jetty.websocket.jsr356.JsrSession' Unsupported Received Message!!!");
 	}
 
 	@Override

@@ -26,7 +26,7 @@ final class BoundChannel extends AbstractChannel<SessionImpl> {
 
 	@Override
 	public String received() {
-		throw new UnsupportedOperationException("'Session' Unsupported Received Message!!!");
+		throw new UnsupportedOperationException("'org.glassfish.tyrus.core.SessionImpl' Unsupported Received Message!!!");
 	}
 
 	@Override
