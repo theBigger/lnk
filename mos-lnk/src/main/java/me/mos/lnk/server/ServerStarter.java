@@ -13,13 +13,6 @@ public class ServerStarter {
 	public static void main(String[] args) {
 		new Thread(new Runnable() {
 			public void run() {
-				me.mos.lnk.server.websocket.glassfish.LnkServerStarter.main(args);
-				System.err.println("WS Lnk Server Started Success!!!");
-			}
-		}).start();
-		
-		new Thread(new Runnable() {
-			public void run() {
 				me.mos.lnk.server.websocket.jetty.LnkServerStarter.main(args);
 				System.err.println("WS Lnk Server Started Success!!!");
 			}

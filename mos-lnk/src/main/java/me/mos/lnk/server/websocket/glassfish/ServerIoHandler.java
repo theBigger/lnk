@@ -10,6 +10,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.apache.commons.lang3.StringUtils;
+import org.glassfish.tyrus.core.SessionImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,15 +21,14 @@ import me.mos.lnk.parser.PacketParser;
 import me.mos.lnk.processor.DefaultServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
 import me.mos.lnk.server.Handler;
-import me.mos.lnk.server.Server;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
  * @version 1.0
  * @since 2015年7月19日 上午8:49:26
  */
-@ServerEndpoint(value = Server.ROOT)
-final class ServerIoHandler implements Handler {
+@ServerEndpoint(value = "/chat")
+public class ServerIoHandler implements Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
@@ -38,7 +38,7 @@ final class ServerIoHandler implements Handler {
 
 	private final PacketParser parser;
 
-	ServerIoHandler() {
+	public ServerIoHandler() {
 		super();
 		processor = new DefaultServerProcessor();
 		parser = new JsonPacketParser();
@@ -46,7 +46,7 @@ final class ServerIoHandler implements Handler {
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig config) {
-		BoundChannel channel = new BoundChannel(session);
+		BoundChannel channel = new BoundChannel((SessionImpl) session);
 		session.getUserProperties().put(IO_CHANNEL, channel);
 	}
 

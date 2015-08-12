@@ -9,7 +9,7 @@ package me.mos.lnk.serializer;
 public class SerializerProvider {
 
 	private static class SerializerHolder {
-		private static final Serializer GSON = new GsonSerializer(false);
+		private static final Serializer JSON = new JacksonSerializer();
 		private static final Serializer XSTREAM = new XStreamSerializer();
 	}
 	
@@ -22,11 +22,11 @@ public class SerializerProvider {
 	}
 
 	public static Serializer currentSerializer() {
-		return SerializerProvider.gson();
+		return SerializerProvider.json();
 	}
 	
-	public static Serializer gson() {
-		return SerializerHolder.GSON;
+	public static Serializer json() {
+		return SerializerHolder.JSON;
 	}
 	
 	public static Serializer xstream() {

@@ -30,7 +30,7 @@ import me.mos.lnk.server.Server;
  * @since 2015年8月11日 下午5:54:59
  */
 @ServerEndpoint(value = Server.ROOT)
-final class ServerIoHandler implements Handler {
+public class ServerIoHandler implements Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
@@ -40,7 +40,7 @@ final class ServerIoHandler implements Handler {
 
 	private final PacketParser parser;
 
-	ServerIoHandler() {
+	public ServerIoHandler() {
 		super();
 		processor = new DefaultServerProcessor();
 		parser = new JsonPacketParser();

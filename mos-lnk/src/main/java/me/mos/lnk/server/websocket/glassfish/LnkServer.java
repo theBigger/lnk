@@ -40,7 +40,7 @@ public class LnkServer implements Server {
 	public void start() {
 		try {
 			latch = new CountDownLatch(1);
-			server = new org.glassfish.tyrus.server.Server("localhost", port, ROOT, ServerIoHandler.class);
+			server = new org.glassfish.tyrus.server.Server("localhost", port, "/lnk", ServerIoHandler.class);
 			server.start();
 			log.error("LnkServer[WS] started success on port {}.", port);
 			latch.await();
