@@ -30,7 +30,7 @@ final class BoundChannel extends AbstractChannel<Socket> {
 
 	private OutputStream out;
 
-	public BoundChannel(Socket channel, Charset charset) {
+	BoundChannel(Socket channel, Charset charset) {
 		super();
 		this.channel = channel;
 		this.charset = charset;

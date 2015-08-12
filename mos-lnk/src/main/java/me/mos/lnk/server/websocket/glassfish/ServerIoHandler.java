@@ -28,7 +28,7 @@ import me.mos.lnk.server.Server;
  * @since 2015年7月19日 上午8:49:26
  */
 @ServerEndpoint(value = Server.ROOT)
-public final class ServerIoHandler implements Handler {
+final class ServerIoHandler implements Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
@@ -68,8 +68,9 @@ public final class ServerIoHandler implements Handler {
 	}
 	
 	@OnError
-	public void onError(Throwable t) {
-		log.error("ServerIoHandler: Channel Error.", t);
+	public void onError(Session session, Throwable t) {
+		BoundChannel channel = (BoundChannel) session.getUserProperties().get(IO_CHANNEL);
+		log.error("ServerIoHandler: Channel Error.\n" + channel, t);
 	}
 
 	@OnClose

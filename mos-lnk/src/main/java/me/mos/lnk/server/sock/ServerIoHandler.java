@@ -29,7 +29,7 @@ final class ServerIoHandler implements Runnable, Handler {
 
 	private final PacketParser parser;
 
-	public ServerIoHandler(BoundChannel channel, ServerProcessor processor, PacketParser parser) {
+	ServerIoHandler(BoundChannel channel, ServerProcessor processor, PacketParser parser) {
 		super();
 		this.channel = channel;
 		this.processor = processor;

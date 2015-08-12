@@ -37,7 +37,7 @@ import me.mos.lnk.server.Server;
  * @version 1.0.0
  * @since 2015年8月12日 下午4:15:44
  */
-public class ServerIoHandler extends SimpleChannelInboundHandler<Object>implements Handler {
+final class ServerIoHandler extends SimpleChannelInboundHandler<Object>implements Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 

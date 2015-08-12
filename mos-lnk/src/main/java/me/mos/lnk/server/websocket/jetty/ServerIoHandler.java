@@ -30,7 +30,7 @@ import me.mos.lnk.server.Server;
  * @since 2015年8月11日 下午5:54:59
  */
 @ServerEndpoint(value = Server.ROOT)
-public class ServerIoHandler implements Handler {
+final class ServerIoHandler implements Handler {
 
 	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
