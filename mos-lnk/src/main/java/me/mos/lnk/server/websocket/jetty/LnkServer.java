@@ -30,7 +30,7 @@ public class LnkServer implements Server {
 		super();
 		try {
 			profile = Profile.newInstance();
-			setPort(profile.getPort());
+			setPort(profile.getPort() + 1);
 			log.error("Config LnkServer Success.");
 		} catch (Exception e) {
 			log.error("Create Server Profile from XML Error.", e);

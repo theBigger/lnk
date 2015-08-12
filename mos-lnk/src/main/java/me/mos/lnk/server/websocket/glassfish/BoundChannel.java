@@ -4,8 +4,7 @@ import java.net.InetSocketAddress;
 
 import javax.websocket.CloseReason;
 import javax.websocket.CloseReason.CloseCodes;
-
-import org.glassfish.tyrus.core.SessionImpl;
+import javax.websocket.Session;
 
 import me.mos.lnk.channel.AbstractChannel;
 import me.mos.lnk.packet.Packet;
@@ -15,22 +14,22 @@ import me.mos.lnk.packet.Packet;
  * @version 1.0
  * @since 2015年7月19日 上午8:32:41
  */
-final class BoundChannel extends AbstractChannel<SessionImpl> {
+final class BoundChannel extends AbstractChannel<Session> {
 
-	private final SessionImpl session;
+	private final Session session;
 
-	BoundChannel(SessionImpl session) {
+	BoundChannel(Session session) {
 		super();
 		this.session = session;
 	}
 
 	@Override
 	public String received() {
-		throw new UnsupportedOperationException("'org.glassfish.tyrus.core.SessionImpl' Unsupported Received Message!!!");
+		throw new UnsupportedOperationException("'javax.websocket.Session' Unsupported Received Message!!!");
 	}
 
 	@Override
-	public SessionImpl getChannel() {
+	public Session getChannel() {
 		return session;
 	}
 
