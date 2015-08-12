@@ -1,7 +1,10 @@
-package me.mos.lnk.server.websocket.glassfish;
+package me.mos.lnk.server.websocket.jetty;
 
-import java.util.concurrent.CountDownLatch;
+import javax.websocket.server.ServerContainer;
 
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,13 +21,11 @@ public class LnkServer implements Server {
 	private static final Logger log = LoggerFactory.getLogger(LnkServer.class);
 
 	private int port = DEFAULT_PORT;
-	
-	private org.glassfish.tyrus.server.Server server;
-	
+
+	private org.eclipse.jetty.server.Server server;
+
 	private Profile profile;
-	
-	private CountDownLatch latch;
-	
+
 	LnkServer() {
 		super();
 		try {
@@ -39,11 +40,19 @@ public class LnkServer implements Server {
 	@Override
 	public void start() {
 		try {
-			latch = new CountDownLatch(1);
-			server = new org.glassfish.tyrus.server.Server("localhost", port, ROOT, ServerIoHandler.class);
+			server = new org.eclipse.jetty.server.Server();
+			ServerConnector connector = new ServerConnector(server);
+			connector.setPort(port);
+			server.addConnector(connector);
+			ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+			context.setContextPath(ROOT);
+			server.setHandler(context);
+			ServerContainer wscontainer = WebSocketServerContainerInitializer.configureContext(context);
+			wscontainer.addEndpoint(ServerIoHandler.class);
 			server.start();
+			server.dumpStdErr();
 			log.error("LnkServer[WS] started success on port {}.", port);
-			latch.await();
+			server.join();
 		} catch (Throwable e) {
 			log.error("LnkServer Starting Error.", e);
 			throw new IllegalStateException(e);
@@ -52,9 +61,14 @@ public class LnkServer implements Server {
 
 	@Override
 	public void stop() {
-		server.stop();
+		try {
+			server.stop();
+			server = null;
+		} catch (Exception e) {
+			log.error("LnkServer Started Error.", e);
+		}
 	}
-	
+
 	public void setPort(int port) {
 		this.port = port;
 	}

@@ -3,10 +3,8 @@ package me.mos.lnk.server.websocket.jetty;
 import java.net.InetSocketAddress;
 
 import org.eclipse.jetty.websocket.api.CloseStatus;
-import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.StatusCode;
-import org.eclipse.jetty.websocket.common.ConnectionState;
-import org.eclipse.jetty.websocket.common.WebSocketSession;
+import org.eclipse.jetty.websocket.jsr356.JsrSession;
 
 import me.mos.lnk.channel.AbstractChannel;
 import me.mos.lnk.packet.Packet;
@@ -17,17 +15,17 @@ import me.mos.lnk.packet.Packet;
  * @version 1.0.0
  * @since 2015年8月11日 下午5:32:07
  */
-public class BoundChannel extends AbstractChannel<Session> {
+public class BoundChannel extends AbstractChannel<JsrSession> {
 	
-	private final Session session;
+	private final JsrSession session;
 
-	BoundChannel(Session session) {
+	BoundChannel(JsrSession session) {
 		super();
 		this.session = session;
 	}
 
 	@Override
-	public Session getChannel() {
+	public JsrSession getChannel() {
 		return session;
 	}
 
@@ -48,8 +46,7 @@ public class BoundChannel extends AbstractChannel<Session> {
 
 	@Override
 	public boolean isConnect() {
-		ConnectionState state = ((WebSocketSession) session).getConnection().getIOState().getConnectionState();
-		return session.isOpen() && (state == ConnectionState.CONNECTED);
+		return session.isOpen();
 	}
 
 	@Override

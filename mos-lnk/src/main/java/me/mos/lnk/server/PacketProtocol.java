@@ -10,7 +10,7 @@ import me.mos.lnk.utils.Charsets;
  */
 public interface PacketProtocol {
 	
-	String DOT = "/";
+	String ROOT = "/";
 	
 	/**
 	 * 数据读取缓冲区大小

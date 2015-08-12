@@ -54,10 +54,10 @@ public abstract class AbstractChannel<I> implements Channel<I> {
 	public String toString() {
 		InetSocketAddress address = getPeerAddress();
 		if (address != null) {
-			return address + DOT + getChannelId();
+			return address + ROOT + getChannelId();
 		}
 		if (getChannel() != null) {
-			return getChannel() + DOT + getChannelId();
+			return getChannel() + ROOT + getChannelId();
 		}
 		if (StringUtils.isNotBlank(getChannelId())) {
 			return getChannelId();

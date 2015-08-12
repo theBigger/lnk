@@ -29,7 +29,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1.jar" sourcepath="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-client-impl/9.3.1.v20150714/javax-websocket-client-impl-9.3.1.v20150714.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/javax-websocket-client-impl/9.3.1.v20150714/javax-websocket-client-impl-9.3.1.v20150714.jar" sourcepath="/jsrws"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-client/9.3.1.v20150714/websocket-client-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-common/9.3.1.v20150714/websocket-common-9.3.1.v20150714.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/websocket/websocket-api/9.3.1.v20150714/websocket-api-9.3.1.v20150714.jar"/>

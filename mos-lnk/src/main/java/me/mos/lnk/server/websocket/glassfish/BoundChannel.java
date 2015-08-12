@@ -4,7 +4,8 @@ import java.net.InetSocketAddress;
 
 import javax.websocket.CloseReason;
 import javax.websocket.CloseReason.CloseCodes;
-import javax.websocket.Session;
+
+import org.glassfish.tyrus.core.SessionImpl;
 
 import me.mos.lnk.channel.AbstractChannel;
 import me.mos.lnk.packet.Packet;
@@ -14,11 +15,11 @@ import me.mos.lnk.packet.Packet;
  * @version 1.0
  * @since 2015年7月19日 上午8:32:41
  */
-final class BoundChannel extends AbstractChannel<Session> {
+final class BoundChannel extends AbstractChannel<SessionImpl> {
 
-	private final Session session;
+	private final SessionImpl session;
 
-	BoundChannel(Session session) {
+	BoundChannel(SessionImpl session) {
 		super();
 		this.session = session;
 	}
@@ -29,7 +30,7 @@ final class BoundChannel extends AbstractChannel<Session> {
 	}
 
 	@Override
-	public Session getChannel() {
+	public SessionImpl getChannel() {
 		return session;
 	}
 
@@ -41,7 +42,7 @@ final class BoundChannel extends AbstractChannel<Session> {
 	@Override
 	public void deliver(Packet packet) {
 		try {
-			session.getBasicRemote().sendText(packet.toPacket());
+			session.getAsyncRemote().sendText(packet.toPacket());
 		} catch (Throwable e) {
 			log.error(toString() + " Deliver Packet Error.", e);
 		}
