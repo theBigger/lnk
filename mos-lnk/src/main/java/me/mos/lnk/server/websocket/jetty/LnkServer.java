@@ -49,8 +49,13 @@ public class LnkServer implements Server {
 			server.setHandler(context);
 			ServerContainer wscontainer = WebSocketServerContainerInitializer.configureContext(context);
 			wscontainer.addEndpoint(ServerIoHandler.class);
+			wscontainer.setAsyncSendTimeout(30000);// 30s
+			wscontainer.setDefaultMaxBinaryMessageBufferSize(1024 * 1024 * 100);// 100M
+			wscontainer.setDefaultMaxSessionIdleTimeout(1000 * 60 * 30);// 30min
+			wscontainer.setDefaultMaxTextMessageBufferSize(1024 * 1024 * 100);// 100M
+			server.setDumpAfterStart(true);
+			server.setStopAtShutdown(true);
 			server.start();
-			server.dumpStdErr();
 			log.error("LnkServer[WS] started success on port {}.", port);
 			server.join();
 		} catch (Throwable e) {

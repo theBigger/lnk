@@ -48,6 +48,9 @@ public class ServerIoHandler implements Handler {
 
 	@OnOpen
 	public void onOpen(Session session, EndpointConfig config) {
+		session.setMaxBinaryMessageBufferSize(1024 * 1024 * 100);// 100M
+		session.setMaxIdleTimeout(1000 * 60 * 30);// 30min
+		session.setMaxTextMessageBufferSize(1024 * 1024 * 100);// 100M
 		BoundChannel channel = new BoundChannel((JsrSession) session);
 		session.getUserProperties().put(IO_CHANNEL, channel);
 	}

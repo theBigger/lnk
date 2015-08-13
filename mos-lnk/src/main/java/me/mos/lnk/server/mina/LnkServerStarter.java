@@ -12,12 +12,12 @@ public class LnkServerStarter {
 
 	public static void main(String[] args) {
 		final LnkServer lnkServer = new LnkServer();
-		lnkServer.start();
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			@Override
 			public void run() {
 				lnkServer.stop();
 			}
 		}));
+		lnkServer.start();
 	}
 }
