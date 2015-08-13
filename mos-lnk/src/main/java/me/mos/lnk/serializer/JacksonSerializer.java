@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -21,11 +22,21 @@ public class JacksonSerializer implements Serializer {
     private final ObjectMapper objectMapper;
 
     public JacksonSerializer() {
+		this(false);
+	}
+
+	public JacksonSerializer(boolean pretty) {
+		this(YYYY_MM_DD_HH_MM_SS, pretty);
+	}
+    
+	public JacksonSerializer(String datePattern, boolean pretty) {
         super();
         objectMapper = new ObjectMapper();
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        objectMapper.setDateFormat(new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS));
+        objectMapper.setSerializationInclusion(Include.NON_NULL);
+        objectMapper.setDateFormat(new SimpleDateFormat(datePattern));
+        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, pretty);
     }
 
     @Override

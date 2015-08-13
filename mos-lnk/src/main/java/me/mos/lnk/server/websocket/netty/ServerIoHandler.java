@@ -23,7 +23,12 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
+import io.netty.util.AttributeKey;
 import io.netty.util.CharsetUtil;
+import me.mos.lnk.packet.InPacket;
+import me.mos.lnk.packet.OutPacket;
+import me.mos.lnk.parser.PacketParser;
+import me.mos.lnk.processor.ServerProcessor;
 import me.mos.lnk.server.Handler;
 import me.mos.lnk.server.Server;
 
@@ -33,23 +38,37 @@ import me.mos.lnk.server.Server;
  * @version 1.0.0
  * @since 2015年8月12日 下午4:15:44
  */
-final class ServerIoHandler extends SimpleChannelInboundHandler<Object>implements Handler {
+final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implements Handler {
 
     private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
 
-    private WebSocketServerHandshaker handshaker;
+	private static final AttributeKey<BoundChannel> IO_CHANNEL = AttributeKey.<BoundChannel>valueOf("IO-CHANNEL");
 
-    @Override
+    private WebSocketServerHandshaker handshaker;
+    
+    private final ServerProcessor processor;
+
+	private final PacketParser parser;
+
+	ServerIoHandler(ServerProcessor processor, PacketParser parser) {
+		super();
+		this.processor = processor;
+		this.parser = parser;
+	}
+
+	@Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         BoundChannel channel = new BoundChannel(ctx.channel());
-
+        ctx.channel().attr(IO_CHANNEL).set(channel);
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
-
+        BoundChannel channel = ctx.channel().attr(IO_CHANNEL).get();
+		log.error("ServerIoHandler: Closing channel due to session Closed: " + channel);
+        channel.close();
     }
 
     @Override
@@ -91,8 +110,19 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object>implement
         if (!(frame instanceof TextWebSocketFrame)) {
             throw new UnsupportedOperationException(String.format("%s frame types not supported", frame.getClass().getName()));
         }
-        String request = TextWebSocketFrame.class.cast(frame).text();
-        ctx.channel().write(new TextWebSocketFrame(request.toUpperCase()));
+        String message = TextWebSocketFrame.class.cast(frame).text();
+        BoundChannel channel = ctx.channel().attr(IO_CHANNEL).get();
+        try {
+			InPacket inPacket = parser.parse(message);
+			channel.setChannelId(inPacket.getMid());
+			OutPacket outPacket = processor.process(channel, inPacket);
+			if (outPacket == null) {
+				return;
+			}
+			channel.deliver(outPacket);
+		} catch (Throwable e) {
+			log.error("ServerIoHandler MessageReceived Error.", e);
+		}
     }
 
     private void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
@@ -119,7 +149,8 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object>implement
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.error("ServerIoHandler Error.", cause);
+        BoundChannel channel = ctx.channel().attr(IO_CHANNEL).get();
+		log.error("ServerIoHandler: Channel Error.\n" + channel, cause);
         ctx.close();
     }
 }

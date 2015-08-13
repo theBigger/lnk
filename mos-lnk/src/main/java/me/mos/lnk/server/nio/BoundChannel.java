@@ -111,7 +111,7 @@ final class BoundChannel extends AbstractChannel<SelectionKey> {
 	}
 
 	@Override
-	protected void _close() {
+	protected void channelInactive() {
 		if (channel != null) {
 			try {
 				channel.close();

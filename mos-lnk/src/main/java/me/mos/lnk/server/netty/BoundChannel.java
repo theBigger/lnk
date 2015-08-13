@@ -1,9 +1,8 @@
-package me.mos.lnk.server.websocket.netty;
+package me.mos.lnk.server.netty;
 
 import java.net.InetSocketAddress;
 
 import io.netty.channel.Channel;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import me.mos.lnk.channel.AbstractChannel;
 import me.mos.lnk.packet.Packet;
 
@@ -39,7 +38,7 @@ final class BoundChannel extends AbstractChannel<Channel> {
 
 	@Override
 	public void deliver(Packet packet) {
-		channel.writeAndFlush(new TextWebSocketFrame(packet.toPacket()));
+		channel.writeAndFlush(packet);
 	}
 
 	@Override

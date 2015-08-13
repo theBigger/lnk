@@ -48,7 +48,7 @@ final class BoundChannel extends AbstractChannel<IoSession> {
 	}
 
 	@Override
-	protected void _close() {
+	protected void channelInactive() {
 		session.close(false);
 		closed = true;
 	}

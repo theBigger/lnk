@@ -54,7 +54,7 @@ final class BoundChannel extends AbstractChannel<SessionImpl> {
 	}
 
 	@Override
-	protected void _close() {
+	protected void channelInactive() {
 		try {
 			session.close(new CloseReason(CloseCodes.NORMAL_CLOSURE, "离线"));
 		} catch (Throwable e) {

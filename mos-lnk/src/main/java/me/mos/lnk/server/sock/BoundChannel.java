@@ -124,7 +124,7 @@ final class BoundChannel extends AbstractChannel<Socket> {
 	}
 
 	@Override
-	protected void _close() {
+	protected void channelInactive() {
 		if (in != null) {
 			try {
 				in.close();

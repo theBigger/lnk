@@ -50,7 +50,7 @@ final class BoundChannel extends AbstractChannel<JsrSession> {
 	}
 
 	@Override
-	protected void _close() {
+	protected void channelInactive() {
 		try {
 			session.disconnect();
 			session.close(new CloseStatus(StatusCode.NORMAL, "离线"));

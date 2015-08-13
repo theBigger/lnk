@@ -43,12 +43,12 @@ public abstract class AbstractChannel<I> implements Channel<I> {
 			} catch (Throwable e) {
 				log.error("Channel : " + this + " Close Error.", e);
 			} finally {
-				_close();
+				channelInactive();
 			}
 		}
 	}
 
-	protected abstract void _close();
+	protected abstract void channelInactive();
 
 	@Override
 	public String toString() {
