@@ -66,14 +66,14 @@ public class LnkServer implements Server {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
-			ServerBootstrap server = new ServerBootstrap();
-			server.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+			ServerBootstrap server = new ServerBootstrap()
+			.group(bossGroup, workerGroup)
+			.channel(NioServerSocketChannel.class)
 			.option(ChannelOption.SO_BACKLOG, backlog)
 			.handler(new LoggingHandler(LogLevel.INFO))
 			.childHandler(new ChannelInitializer<SocketChannel>() {
-				@Override
-				protected void initChannel(SocketChannel ch) throws Exception {
-					ChannelPipeline pipeline = ch.pipeline();
+				protected void initChannel(SocketChannel channel) throws Exception {
+					ChannelPipeline pipeline = channel.pipeline();
 					pipeline.addLast("codec-http", new HttpServerCodec());
 					pipeline.addLast("aggregator", new HttpObjectAggregator(1024 * 1024 * 100));// 100M
 					pipeline.addLast("handler", new ServerIoHandler(processor, parser));

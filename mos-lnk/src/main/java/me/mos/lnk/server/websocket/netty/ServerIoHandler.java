@@ -40,15 +40,17 @@ import me.mos.lnk.server.Server;
  */
 final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implements Handler {
 
-    private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ServerIoHandler.class);
+
+    private static final String WS_SCHEME = "ws://";
 
 	private static final AttributeKey<BoundChannel> IO_CHANNEL = AttributeKey.<BoundChannel>valueOf("IO-CHANNEL");
-
-    private WebSocketServerHandshaker handshaker;
     
     private final ServerProcessor processor;
 
 	private final PacketParser parser;
+
+    private WebSocketServerHandshaker handshaker;
 
 	ServerIoHandler(ServerProcessor processor, PacketParser parser) {
 		super();
@@ -74,13 +76,13 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implemen
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object message) throws Exception {
         if (message instanceof FullHttpRequest) {
-            handleHttpInboundMessage(ctx, FullHttpRequest.class.cast(message));
+            handshakerHandler(ctx, FullHttpRequest.class.cast(message));
         } else if (message instanceof WebSocketFrame) {
-            handleWebSocketInboundMessage(ctx, WebSocketFrame.class.cast(message));
+            webSocketHandler(ctx, WebSocketFrame.class.cast(message));
         }
     }
 
-    private void handleHttpInboundMessage(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {
+    private void handshakerHandler(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {
         if (!req.getDecoderResult().isSuccess()) {
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
             return;
@@ -98,7 +100,7 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implemen
         }
     }
 
-    private void handleWebSocketInboundMessage(ChannelHandlerContext ctx, WebSocketFrame frame) {
+    private void webSocketHandler(ChannelHandlerContext ctx, WebSocketFrame frame) {
         if (frame instanceof CloseWebSocketFrame) {
             handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
             return;
@@ -108,7 +110,7 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implemen
             return;
         }
         if (!(frame instanceof TextWebSocketFrame)) {
-            throw new UnsupportedOperationException(String.format("%s frame types not supported", frame.getClass().getName()));
+            throw new UnsupportedOperationException(String.format("%s frame types not supported!!!", frame.getClass().getName()));
         }
         String message = TextWebSocketFrame.class.cast(frame).text();
         BoundChannel channel = ctx.channel().attr(IO_CHANNEL).get();
@@ -137,9 +139,9 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implemen
             channelFuture.addListener(ChannelFutureListener.CLOSE);
         }
     }
-
+    
     private String getWebSocketLocation(FullHttpRequest req) {
-        return "ws://" + req.headers().get(HttpHeaders.Names.HOST) + Server.ROOT;
+        return WS_SCHEME + req.headers().get(HttpHeaders.Names.HOST) + Server.ROOT;
     }
 
     @Override
