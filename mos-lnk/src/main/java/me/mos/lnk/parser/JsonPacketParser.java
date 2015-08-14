@@ -1,7 +1,9 @@
 package me.mos.lnk.parser;
 
+import java.util.Map;
+
 import me.mos.lnk.packet.Type;
-import net.sf.json.JSONObject;
+import me.mos.lnk.serializer.SerializerProvider;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
@@ -13,7 +15,8 @@ public class JsonPacketParser extends AbstractPacketParser {
 
 	@Override
 	protected Type parseType(String packet) throws Throwable {
-		JSONObject json = JSONObject.fromObject(packet);
-		return Type.parse((byte) json.getInt(TYPE));
+		@SuppressWarnings("unchecked")
+		Map<String, Object> json = SerializerProvider.json().deserialize(Map.class, packet);
+		return Type.parse(Byte.parseByte(String.valueOf(json.get(TYPE))));
 	}
 }

@@ -28,7 +28,7 @@ public class JacksonSerializer implements Serializer {
 	public JacksonSerializer(boolean pretty) {
 		this(YYYY_MM_DD_HH_MM_SS, pretty);
 	}
-    
+	
 	public JacksonSerializer(String datePattern, boolean pretty) {
         super();
         objectMapper = new ObjectMapper();

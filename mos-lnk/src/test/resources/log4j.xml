@@ -1,37 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "http://toolkit.alibaba-inc.com/dtd/log4j/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="null" debug="null">
-	<appender name="MOS-LNK-Appender" class="org.mos.lnk.utils.DailyRollingFileAppender">
-		<param name="file" value="../logs/mos-lnk-srv.log" />
+	<appender name="MOS-LNK-Appender" class="me.mos.lnk.utils.DailyRollingFileAppender">
+		<param name="file" value="../logs/mos-lnk.log" />
 		<param name="append" value="true" />
 		<param name="encoding" value="UTF-8" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p - %m%n" />
+			<param name="ConversionPattern" value="%d %-5p %t %c - %m%n" />
 		</layout>
 	</appender>
 	<logger name="org.apache" additivity="false">
-		<level value="DEBUG" />
+		<level value="ERROR" />
 		<appender-ref ref="MOS-LNK-Appender" />
 	</logger>
 	<logger name="com.mysql" additivity="false">
-		<level value="DEBUG" />
+		<level value="ERROR" />
 		<appender-ref ref="MOS-LNK-Appender" />
 	</logger>
 	<logger name="com.thoughtworks.xstream" additivity="false">
-		<level value="DEBUG" />
+		<level value="ERROR" />
 		<appender-ref ref="MOS-LNK-Appender" />
 	</logger>
 	<logger name="org.xmlpull" additivity="false">
-		<level value="DEBUG" />
+		<level value="ERROR" />
 		<appender-ref ref="MOS-LNK-Appender" />
 	</logger>
-	<logger name="me.mos.ti" additivity="false">
-		<level value="DEBUG" />
+	<logger name="javax.websocket" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="org.glassfish" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="io.netty" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="net.sf" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="com.google" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="org.springframework" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="org.dom4j" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="org.eclipse" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="com.fasterxml" additivity="false">
+		<level value="ERROR" />
+		<appender-ref ref="MOS-LNK-Appender" />
+	</logger>
+	<logger name="org.mos.lnk" additivity="false">
+		<level value="ERROR" />
 		<appender-ref ref="MOS-LNK-Appender" />
 	</logger>
 	<root>
-		<level value="DEBUG" />
+		<level value="ERROR" />
 		<appender-ref ref="MOS-LNK-Appender" />
 	</root>
 </log4j:configuration>
