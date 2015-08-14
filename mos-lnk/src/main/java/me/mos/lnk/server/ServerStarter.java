@@ -13,15 +13,14 @@ public class ServerStarter {
 	public static void main(String[] args) {
 		new Thread(new Runnable() {
 			public void run() {
-				me.mos.lnk.server.websocket.netty.LnkServerStarter.main(args);
+				new me.mos.lnk.server.websocket.netty.LnkServer().registerShutdownHookStart();
 				System.err.println("WS Lnk Server Started Success!!!");
 			}
 		}).start();
-		
 		new Thread(new Runnable() {
 			public void run() {
-				me.mos.lnk.server.netty.LnkServerStarter.main(args);
-				System.err.println("WS Lnk Server Started Success!!!");
+				new me.mos.lnk.server.netty.LnkServer().registerShutdownHookStart();
+				System.err.println("Lnk Server Started Success!!!");
 			}
 		}).start();
 	}

@@ -19,4 +19,9 @@ public interface Server extends PacketProtocol {
 	 * 停止服务
 	 */
 	void stop();
+	
+	/**
+	 * 注册jvm关闭钩子, 然后启动服务.
+	 */
+	void registerShutdownHookStart();
 }

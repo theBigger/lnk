@@ -2,9 +2,6 @@ package me.mos.lnk.server.netty;
 
 import java.nio.charset.Charset;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -22,7 +19,7 @@ import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
 import me.mos.lnk.processor.DefaultServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
-import me.mos.lnk.server.Server;
+import me.mos.lnk.server.AbstractServer;
 import me.mos.lnk.server.netty.codec.PacketProtocolDecoder;
 import me.mos.lnk.server.netty.codec.PacketProtocolEncoder;
 
@@ -31,9 +28,7 @@ import me.mos.lnk.server.netty.codec.PacketProtocolEncoder;
  * @version 1.0
  * @since 2015年7月19日 上午8:48:00
  */
-public class LnkServer implements Server {
-
-	private static final Logger log = LoggerFactory.getLogger(LnkServer.class);
+public class LnkServer extends AbstractServer {
 
 	private int port = DEFAULT_PORT;
 
@@ -52,7 +47,7 @@ public class LnkServer implements Server {
 
 	private PacketParser parser;
 
-	LnkServer() {
+	public LnkServer() {
 		super();
 		try {
 			profile = Profile.newInstance();
@@ -68,7 +63,7 @@ public class LnkServer implements Server {
 	}
 	
 	@Override
-	public void start() {
+	protected void doStart() {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
@@ -100,7 +95,7 @@ public class LnkServer implements Server {
 	}
 
 	@Override
-	public void stop() {
+	protected void doStop() {
 		try {
 			channel.disconnect();
 			channel.close();

@@ -5,20 +5,16 @@ import javax.websocket.server.ServerContainer;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import me.mos.lnk.etc.Profile;
-import me.mos.lnk.server.Server;
+import me.mos.lnk.server.AbstractServer;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
  * @version 1.0
  * @since 2015年7月19日 上午8:48:00
  */
-public class LnkServer implements Server {
-
-	private static final Logger log = LoggerFactory.getLogger(LnkServer.class);
+public class LnkServer extends AbstractServer {
 
 	private int port = DEFAULT_PORT;
 
@@ -26,7 +22,7 @@ public class LnkServer implements Server {
 
 	private Profile profile;
 
-	LnkServer() {
+	public LnkServer() {
 		super();
 		try {
 			profile = Profile.newInstance();
@@ -38,7 +34,7 @@ public class LnkServer implements Server {
 	}
 
 	@Override
-	public void start() {
+	protected void doStart() {
 		try {
 			server = new org.eclipse.jetty.server.Server();
 			ServerConnector connector = new ServerConnector(server);
@@ -65,7 +61,7 @@ public class LnkServer implements Server {
 	}
 
 	@Override
-	public void stop() {
+	protected void doStop() {
 		try {
 			server.stop();
 			server = null;

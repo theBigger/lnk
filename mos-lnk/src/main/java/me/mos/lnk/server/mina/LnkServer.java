@@ -10,8 +10,6 @@ import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.filter.logging.MdcInjectionFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import me.mos.lnk.channel.ChannelActiveMonitor;
 import me.mos.lnk.etc.Profile;
@@ -20,7 +18,7 @@ import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
 import me.mos.lnk.processor.DefaultServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
-import me.mos.lnk.server.Server;
+import me.mos.lnk.server.AbstractServer;
 import me.mos.lnk.server.mina.codec.PacketProtocolCodecFilter;
 
 /**
@@ -29,9 +27,7 @@ import me.mos.lnk.server.mina.codec.PacketProtocolCodecFilter;
  * @version 1.0.0
  * @since 2015年6月10日 下午4:15:22
  */
-final class LnkServer implements Server {
-
-	private static final Logger log = LoggerFactory.getLogger(LnkServer.class);
+public class LnkServer extends AbstractServer {
 
 	private int port = DEFAULT_PORT;
 	
@@ -63,7 +59,7 @@ final class LnkServer implements Server {
 	
 	private PacketParser parser;
 	
-	LnkServer() {
+	public LnkServer() {
 		super();
 		try {
 			profile = Profile.newInstance();
@@ -83,7 +79,7 @@ final class LnkServer implements Server {
 	}
 
 	@Override
-	public void start() {
+	protected void doStart() {
 		acceptor = new NioSocketAcceptor(Runtime.getRuntime().availableProcessors() * 2);
 		acceptor.getFilterChain().addLast("exceutor", new ExecutorFilter(new LnkExecutor(profile)));
 		acceptor.getFilterChain().addLast("mdc", new MdcInjectionFilter());
@@ -110,7 +106,7 @@ final class LnkServer implements Server {
 	}
 
 	@Override
-	public void stop() {
+	protected void doStop() {
 		acceptor.dispose();
 	}
 	

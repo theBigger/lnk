@@ -5,9 +5,6 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import me.mos.lnk.channel.ChannelActiveMonitor;
 import me.mos.lnk.etc.Profile;
 import me.mos.lnk.executor.LnkExecutor;
@@ -15,7 +12,7 @@ import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
 import me.mos.lnk.processor.DefaultServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
-import me.mos.lnk.server.Server;
+import me.mos.lnk.server.AbstractServer;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
@@ -23,9 +20,7 @@ import me.mos.lnk.server.Server;
  * @version 1.0.0
  * @since 2015年6月1日 下午2:16:40
  */
-final class LnkServer implements Server {
-
-	private final static Logger log = LoggerFactory.getLogger(LnkServer.class);
+public class LnkServer extends AbstractServer {
 
 	private int port = DEFAULT_PORT;
 
@@ -54,7 +49,7 @@ final class LnkServer implements Server {
 	
 	private PacketParser parser;
 
-	LnkServer() {
+	public LnkServer() {
 		super();
 		try {
 			profile = Profile.newInstance();
@@ -71,7 +66,7 @@ final class LnkServer implements Server {
 	}
 
 	@Override
-	public void start() {
+	protected void doStart() {
 		try {
 			log.error("LnkServer starting on port {}", port);
 			threadPoolExecutor = new LnkExecutor(profile);
@@ -112,7 +107,7 @@ final class LnkServer implements Server {
 	}
 
 	@Override
-	public void stop() {
+	protected void doStop() {
 		log.info("Stoping LnkServer, port={}", port);
 		if (threadPoolExecutor != null) {
 			try {
