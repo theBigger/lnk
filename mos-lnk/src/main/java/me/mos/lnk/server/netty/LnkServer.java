@@ -16,6 +16,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import me.mos.lnk.channel.ChannelActiveMonitor;
 import me.mos.lnk.etc.Profile;
 import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
@@ -55,7 +56,7 @@ public class LnkServer implements Server {
 		super();
 		try {
 			profile = Profile.newInstance();
-			setPort(profile.getPort());
+			setPort(profile.getPort() + 1);
 			setBacklog(profile.getBacklog());
 			setCharset(profile.getCharset());
 			setProcessor(new DefaultServerProcessor());
@@ -65,7 +66,7 @@ public class LnkServer implements Server {
 			log.error("Create Server Profile from XML Error.", e);
 		}
 	}
-
+	
 	@Override
 	public void start() {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -81,6 +82,7 @@ public class LnkServer implements Server {
 					pipeline.addLast("handler", new ServerIoHandler(processor));
 				}
 			});
+			new Thread(new ChannelActiveMonitor()).start();
 			log.error("LnkServer Started success on port {}.", port);
 			channel = server.bind(port).sync().channel();
 			channel.closeFuture().sync();

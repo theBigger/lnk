@@ -17,5 +17,12 @@ public class ServerStarter {
 				System.err.println("WS Lnk Server Started Success!!!");
 			}
 		}).start();
+		
+		new Thread(new Runnable() {
+			public void run() {
+				me.mos.lnk.server.netty.LnkServerStarter.main(args);
+				System.err.println("WS Lnk Server Started Success!!!");
+			}
+		}).start();
 	}
 }

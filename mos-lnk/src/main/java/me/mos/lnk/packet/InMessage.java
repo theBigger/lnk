@@ -48,7 +48,7 @@ public class InMessage extends AbstractInPacket {
 	}
 
 	@Override
-	public Type getPacketType() {
+	public Type type() {
 		return Type.Message;
 	}
 

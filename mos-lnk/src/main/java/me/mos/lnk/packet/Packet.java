@@ -28,7 +28,7 @@ public interface Packet {
 	/**
 	 * 消息类型
 	 */
-	Type getPacketType();
+	Type type();
 	
 	/**
 	 * 序列化器

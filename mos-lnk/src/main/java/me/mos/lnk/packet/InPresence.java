@@ -36,7 +36,7 @@ public class InPresence extends AbstractInPacket {
 	}
 
 	@Override
-	public Type getPacketType() {
+	public Type type() {
 		return Type.Presence;
 	}
 

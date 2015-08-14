@@ -45,7 +45,7 @@ public class PacketProtocolDecoder extends ByteToMessageDecoder implements Packe
 			in.markReaderIndex();
 			in.readBytes(head);
 			int length = ByteUtil.toInt(ByteUtil.getBytes(head, 0, PACKET_BYTE_LENGTH));
-			if (length > in.readableBytes()) {
+			if (length != in.readableBytes()) {
 				in.resetReaderIndex();
 				return;
 			}

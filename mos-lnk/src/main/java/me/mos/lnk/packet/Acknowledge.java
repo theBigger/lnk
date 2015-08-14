@@ -1,6 +1,5 @@
 package me.mos.lnk.packet;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -32,8 +31,7 @@ public class Acknowledge extends AbstractOutPacket {
 	}
 
 	@Override
-    @JsonIgnore
-	public Type getPacketType() {
+	public Type type() {
 		return Type.Acknowledge;
 	}
 

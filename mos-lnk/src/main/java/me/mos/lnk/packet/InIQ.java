@@ -31,7 +31,7 @@ public class InIQ extends AbstractInPacket {
 	}
 
 	@Override
-	public Type getPacketType() {
+	public Type type() {
 		return Type.IQ;
 	}
 

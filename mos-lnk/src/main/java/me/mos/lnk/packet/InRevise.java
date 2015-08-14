@@ -79,7 +79,7 @@ public class InRevise extends AbstractInPacket {
 	}
 
 	@Override
-	public Type getPacketType() {
+	public Type type() {
 		return Type.Revise;
 	}
 

@@ -47,7 +47,7 @@ final class PacketProtocolDecoder extends CumulativeProtocolDecoder implements P
 			in.mark();
 			in.get(head);
 			int length = ByteUtil.toInt(ByteUtil.getBytes(head, 0, PACKET_BYTE_LENGTH));
-			if (length > in.remaining()) {
+			if (length != in.remaining()) {
 				in.reset();
 				return false;
 			}

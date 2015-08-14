@@ -5,9 +5,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Pipe;
 import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
-
-import me.mos.lnk.channel.Channels;
 import me.mos.lnk.packet.Acknowledge;
 import me.mos.lnk.packet.InIQ;
 import me.mos.lnk.packet.InMessage;
@@ -20,7 +17,6 @@ import me.mos.lnk.packet.OutPresence;
 import me.mos.lnk.packet.OutRegister;
 import me.mos.lnk.packet.OutRevise;
 import me.mos.lnk.server.Server;
-import me.mos.lnk.utils.Charsets;
 
 /**
  * @author 刘飞 E-mail:liufei_it@126.com
@@ -31,6 +27,27 @@ import me.mos.lnk.utils.Charsets;
 public class Client {
 
 	private static final String PASSWD = "123456";
+	
+	public static void main(String[] args) throws Exception {
+		Socket socket = new Socket("127.0.0.1", Server.DEFAULT_PORT);
+//		Socket socket = new Socket("wjz", Server.DEFAULT_PORT);
+		socket.setKeepAlive(true);
+		socket.setSoTimeout(30000);
+//		BoundChannel channel = new BoundChannel(socket, Charsets.UTF_8);
+//		channel.deliver(newInIQ());
+//		channel.deliver(newInRegister());
+//		channel.deliver(newInPresence());
+//		channel.deliver(newInMessage());
+//		System.out.println("1 登录");
+//		System.out.println("2 登录 并给1发消息");
+//		while (true) {
+//			String response = channel.received();
+//			if (StringUtils.isBlank(response)) {
+//				continue;
+//			}
+//			System.err.println("收到消息 : " + response);
+//		}
+	}
 	
 	public static void main21212(String[] args) throws Exception {
 		Pipe pipe = Pipe.open();
@@ -71,10 +88,6 @@ public class Client {
 		return inPresence;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(newInIQ());
-	}
-
 	public static InIQ newInIQ() {
 		InIQ inIQ = new InIQ();
 		inIQ.setMid(1);
