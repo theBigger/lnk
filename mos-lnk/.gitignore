@@ -1,9 +1,9 @@
 /target
-/logs/
-/build/
+/logs
+/build
+/lnk
 /bin
-/lnk/
 /.settings
-.settings/
+.settings
 .classpath
 .project
