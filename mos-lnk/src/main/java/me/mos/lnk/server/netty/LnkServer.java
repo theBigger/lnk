@@ -72,8 +72,12 @@ public class LnkServer implements Server {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
-			ServerBootstrap server = new ServerBootstrap();
-			server.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, backlog).handler(new LoggingHandler(LogLevel.INFO)).childHandler(new ChannelInitializer<SocketChannel>() {
+			ServerBootstrap server = new ServerBootstrap()
+			.group(bossGroup, workerGroup)
+			.channel(NioServerSocketChannel.class)
+			.option(ChannelOption.SO_BACKLOG, backlog)
+			.handler(new LoggingHandler(LogLevel.INFO))
+			.childHandler(new ChannelInitializer<SocketChannel>() {
 				@Override
 				protected void initChannel(SocketChannel ch) throws Exception {
 					ChannelPipeline pipeline = ch.pipeline();
