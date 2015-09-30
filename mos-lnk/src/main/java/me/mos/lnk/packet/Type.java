@@ -9,8 +9,16 @@ package me.mos.lnk.packet;
  * @since 2015年6月2日 上午12:52:54
  */
 public enum Type {
-
-	IQ((byte) 1), Message((byte) 2), Presence((byte) 3), Register((byte) 4), Acknowledge((byte) 5), Revise((byte) 6);
+	IQ((byte) 1), 
+	Message((byte) 2), 
+	Presence((byte) 3), 
+	Register((byte) 4), 
+	Acknowledge((byte) 5), 
+	Revise((byte) 6),
+	PushId((byte) 7),
+    Group((byte) 8),
+    GroupMessage((byte) 9)
+	;
 
 	public final byte type;
 

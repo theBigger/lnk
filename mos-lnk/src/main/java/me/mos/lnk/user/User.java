@@ -28,6 +28,9 @@ public class User {
 	/** 第三方系统账号ID */
 	private String party_id;
 
+    /** 推送ID */
+	private String push_id;
+
 	/** 用户昵称 */
 	private String nick;
 
@@ -270,6 +273,14 @@ public class User {
 		this.gmt_modified = gmt_modified;
 	}
 
+    public String getPush_id() {
+        return push_id;
+    }
+
+    public void setPush_id(String push_id) {
+        this.push_id = push_id;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -288,6 +299,7 @@ public class User {
         result = prime * result + ((party_id == null) ? 0 : party_id.hashCode());
         result = prime * result + ((passwd == null) ? 0 : passwd.hashCode());
         result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+        result = prime * result + ((push_id == null) ? 0 : push_id.hashCode());
         result = prime * result + ((qq == null) ? 0 : qq.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
@@ -370,6 +382,11 @@ public class User {
             if (other.phone != null)
                 return false;
         } else if (!phone.equals(other.phone))
+            return false;
+        if (push_id == null) {
+            if (other.push_id != null)
+                return false;
+        } else if (!push_id.equals(other.push_id))
             return false;
         if (qq == null) {
             if (other.qq != null)

@@ -17,5 +17,7 @@ public interface UserProvider {
 	int online(long mid);
 	int offline(long mid);
 	
+	int uploadPushId(long mid, String pushId);
+	
 	List<User> queryOnline();
 }

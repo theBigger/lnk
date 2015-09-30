@@ -31,6 +31,7 @@ public class DefaultUserProvider implements UserProvider {
 	private static final String SELECT_SQL = "SELECT "
 			+ "`lnk_user`.`mid`, "
 			+ "`lnk_user`.`party_id`, "
+            + "`lnk_user`.`push_id`, "
 			+ "`lnk_user`.`nick`, "
 			+ "`lnk_user`.`passwd`, "
 			+ "`lnk_user`.`avatar`, "
@@ -51,6 +52,7 @@ public class DefaultUserProvider implements UserProvider {
 	private static final String SELECT_ONLINE_SQL = "SELECT "
 			+ "`lnk_user`.`mid`, "
 			+ "`lnk_user`.`party_id`, "
+            + "`lnk_user`.`push_id`, "
 			+ "`lnk_user`.`nick`, "
 			+ "`lnk_user`.`passwd`, "
 			+ "`lnk_user`.`avatar`, "
@@ -70,12 +72,14 @@ public class DefaultUserProvider implements UserProvider {
 	
 	
 	private static final String CREATE_USR_SQL = "INSERT INTO `mos_lnk`.`lnk_user` "
-			+ "(`party_id`, `nick`, `passwd`, `avatar`, `weixin`, `qq`, `email`, `telephone`, `phone`, `address`, `ip`, `longitude`, `latitude`, `status`, `extend`, `gmt_created`, `gmt_modified`) "
+			+ "(`party_id`, `push_id`, `nick`, `passwd`, `avatar`, `weixin`, `qq`, `email`, `telephone`, `phone`, `address`, `ip`, `longitude`, `latitude`, `status`, `extend`, `gmt_created`, `gmt_modified`) "
 			+ "VALUES "
-			+ "(:party_id, :nick, :passwd, :avatar, :weixin, :qq, :email, :telephone, :phone, :address, :ip, :longitude, :latitude, :status, :extend, :gmt_created, :gmt_modified);";
+			+ "(:party_id, :push_id, :nick, :passwd, :avatar, :weixin, :qq, :email, :telephone, :phone, :address, :ip, :longitude, :latitude, :status, :extend, :gmt_created, :gmt_modified);";
 
 	private static final String UPDATE_USER_STATUS_SQL = "UPDATE `mos_lnk`.`lnk_user` SET `lnk_user`.`status` = :status, `lnk_user`.`gmt_modified` = NOW() WHERE `lnk_user`.`mid` = :mid;";
 	
+	private static final String UPDATE_USER_PUSH_ID_SQL = "UPDATE `mos_lnk`.`lnk_user` SET `lnk_user`.`push_id` = :push_id, `lnk_user`.`gmt_modified` = NOW() WHERE `lnk_user`.`mid` = :mid;";
+    
 	private static final String UPDATE_USER_SQL = "UPDATE `mos_lnk`.`lnk_user` SET "
 			+ "`party_id` = :party_id, "
 			+ "`nick` = :nick, "
@@ -98,6 +102,14 @@ public class DefaultUserProvider implements UserProvider {
 	}
 
 	@Override
+    public int uploadPushId(long mid, String pushId) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("mid", mid);
+        paramMap.put("push_id", pushId);
+        return jdbcTemplate.update(UPDATE_USER_PUSH_ID_SQL, paramMap);
+    }
+
+    @Override
 	public int update(User user) {
 		return jdbcTemplate.update(UPDATE_USER_SQL, new BeanPropertySqlParameterSource(user));
 	}

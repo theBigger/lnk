@@ -1,9 +1,12 @@
 package me.mos.lnk.parser;
 
+import me.mos.lnk.packet.InGroup;
+import me.mos.lnk.packet.InGroupMessage;
 import me.mos.lnk.packet.InIQ;
 import me.mos.lnk.packet.InMessage;
 import me.mos.lnk.packet.InPacket;
 import me.mos.lnk.packet.InPresence;
+import me.mos.lnk.packet.InPushId;
 import me.mos.lnk.packet.InRegister;
 import me.mos.lnk.packet.InRevise;
 import me.mos.lnk.packet.Type;
@@ -36,6 +39,12 @@ public abstract class AbstractPacketParser implements PacketParser {
 			return SerializerProvider.deserialize(InRegister.class, packet);
 		case Revise:
 			return SerializerProvider.deserialize(InRevise.class, packet);
+        case PushId:
+            return SerializerProvider.deserialize(InPushId.class, packet);
+        case Group:
+            return SerializerProvider.deserialize(InGroup.class, packet);
+        case GroupMessage:
+            return SerializerProvider.deserialize(InGroupMessage.class, packet);
 		default:
 			throw new IllegalStateException("Error Type of Packet " + packet);
 		}

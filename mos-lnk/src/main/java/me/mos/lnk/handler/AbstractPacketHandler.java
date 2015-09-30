@@ -3,6 +3,10 @@ package me.mos.lnk.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import me.mos.lnk.groups.DefaultGroupProvider;
+import me.mos.lnk.groups.GroupProvider;
+import me.mos.lnk.groups.message.DefaultGroupMessageProvider;
+import me.mos.lnk.groups.message.GroupMessageProvider;
 import me.mos.lnk.message.DefaultMessageProvider;
 import me.mos.lnk.message.MessageProvider;
 import me.mos.lnk.packet.InPacket;
@@ -22,10 +26,16 @@ public abstract class AbstractPacketHandler<I extends InPacket> implements Packe
 	protected MessageProvider messageProvider;
 	
 	protected UserProvider userProvider;
+    
+    protected GroupProvider groupProvider;
+    
+    protected GroupMessageProvider groupMessageProvider;
 
 	public AbstractPacketHandler() {
 		super();
 		messageProvider = DefaultMessageProvider.getInstance();
 		userProvider = DefaultUserProvider.getInstance();
+		groupProvider = DefaultGroupProvider.getInstance();
+		groupMessageProvider = DefaultGroupMessageProvider.getInstance();
 	}
 }

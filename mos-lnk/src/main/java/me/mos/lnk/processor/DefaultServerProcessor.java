@@ -1,15 +1,21 @@
 package me.mos.lnk.processor;
 
 import me.mos.lnk.channel.Channel;
+import me.mos.lnk.handler.GroupHandler;
+import me.mos.lnk.handler.GroupMessageHandler;
 import me.mos.lnk.handler.IQHandler;
 import me.mos.lnk.handler.MessageHandler;
 import me.mos.lnk.handler.PresenceHandler;
+import me.mos.lnk.handler.PushIdHandler;
 import me.mos.lnk.handler.RegisterHandler;
 import me.mos.lnk.handler.ReviseHandler;
+import me.mos.lnk.packet.InGroup;
+import me.mos.lnk.packet.InGroupMessage;
 import me.mos.lnk.packet.InIQ;
 import me.mos.lnk.packet.InMessage;
 import me.mos.lnk.packet.InPacket;
 import me.mos.lnk.packet.InPresence;
+import me.mos.lnk.packet.InPushId;
 import me.mos.lnk.packet.InRegister;
 import me.mos.lnk.packet.InRevise;
 import me.mos.lnk.packet.OutPacket;
@@ -33,6 +39,12 @@ public class DefaultServerProcessor implements ServerProcessor {
 	private RegisterHandler registerHandler;
 
 	private ReviseHandler reviseHandler;
+	
+	private PushIdHandler pushIdHandler;
+    
+    private GroupHandler groupHandler;
+    
+    private GroupMessageHandler groupMessageHandler;
 
 	public DefaultServerProcessor() {
 		super();
@@ -41,6 +53,9 @@ public class DefaultServerProcessor implements ServerProcessor {
 		presenceHandler = new PresenceHandler();
 		registerHandler = new RegisterHandler();
 		reviseHandler = new ReviseHandler();
+		pushIdHandler = new PushIdHandler();
+		groupHandler = new GroupHandler();
+		groupMessageHandler = new GroupMessageHandler();
 	}
 
 	@Override
@@ -62,6 +77,15 @@ public class DefaultServerProcessor implements ServerProcessor {
 		case Revise:
 			outPacket = reviseHandler.process(channel, (InRevise) packet);
 			break;
+        case PushId:
+            outPacket = pushIdHandler.process(channel, (InPushId) packet);
+            break;
+        case Group:
+            outPacket = groupHandler.process(channel, (InGroup) packet);
+            break;
+        case GroupMessage:
+            outPacket = groupMessageHandler.process(channel, (InGroupMessage) packet);
+            break;
 		default:
 			break;
 		}

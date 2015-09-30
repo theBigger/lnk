@@ -17,6 +17,12 @@ public interface Alias {
 	String REGISTER_NAME = "register";
 	
 	String REVISE_NAME = "revise";
+    
+    String PUSH_ID_NAME = "push-id";
+    
+    String GROUP_NAME = "group";
+    
+    String GROUP_MESSAGE_NAME = "group-message";
 	
 	String ACKNOWLEDGE_NAME = "ack";
 }
