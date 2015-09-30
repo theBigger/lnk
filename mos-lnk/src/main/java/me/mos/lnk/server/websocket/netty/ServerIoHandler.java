@@ -113,6 +113,7 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implemen
             throw new UnsupportedOperationException(String.format("%s frame types not supported!!!", frame.getClass().getName()));
         }
         String message = TextWebSocketFrame.class.cast(frame).text();
+        log.error("Incoming Packet : {}", message);
         BoundChannel channel = ctx.channel().attr(IO_CHANNEL).get();
         try {
 			InPacket inPacket = parser.parse(message);
@@ -121,6 +122,7 @@ final class ServerIoHandler extends SimpleChannelInboundHandler<Object> implemen
 			if (outPacket == null) {
 				return;
 			}
+	        log.error("Outcoming Packet : {}", outPacket);
 			channel.deliver(outPacket);
 		} catch (Throwable e) {
 			log.error("ServerIoHandler MessageReceived Error.", e);

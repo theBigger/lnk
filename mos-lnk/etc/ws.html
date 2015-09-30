@@ -8,71 +8,13 @@
 		<input type="submit" value="start" onclick="start()" />
 	</div>
 	<div id="messages"></div>
-	
-	<script type="text/javascript">
-	/**
-	var ws;
-	var LNK = (function() {
-		var MOS_LNK = {
-			init : function(config) {
-				if (!window.WebSocket) {
-					window.WebSocket = window.MozWebSocket;
-				}
-				if (window.WebSocket) {
-					ws = new WebSocket("ws://" + config.host + ":" + config.port + config.context);
-				}
-				ws.onopen = function(event) {
-					alert("Connect to Server.");
-				};
-				ws.onmessage = function(event) {
-					received(event.data);
-				};
-				ws.onerror = function(event) {
-					alert("Server Error.");
-				};
-				ws.onclose = function(event) {
-					alert("Close Connect.");
-				};
-				ws.binaryType = 'JSON';
-				console.log(ws);
-				return ws;
-			},
-			received : function(packet) {
-				alert("received : " + packet);
-			},
-			deliver : function(packet) {
-				if (!window.WebSocket) {
-					return;
-				}
-				if (ws.readyState == WebSocket.OPEN) {
-					ws.send(message);
-				} else {
-					alert("The socket is not open.");
-				}
-			}
-		};
-		return MOS_LNK;
-	})();
-	function start() {
-		LNK.init(
-			{
-				host : "120.24.228.100",
-				port : 9099,
-				context : "/ws/lnk"
-			}		
-		);
-		LNK.deliver('{"mid":1,"type":1}');
-		return false;
-	}
-	**/
-	</script>
 	<script type="text/javascript">
 		var ws;
 		if (!window.WebSocket) {
 			window.WebSocket = window.MozWebSocket;
 		}
 		if (window.WebSocket) {
-			ws = new WebSocket("ws://120.24.228.100:9099");
+			ws = new WebSocket("ws://123.57.55.59:9099");
 		}
 		ws.onopen = function(event) {
 			document.getElementById('messages').innerHTML = 'Connection established<br/>';

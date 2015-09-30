@@ -28,7 +28,7 @@ public class Client {
 
 	private static final String PASSWD = "123456";
 	
-	public static void main(String[] args) throws Exception {
+	public static void main11111(String[] args) throws Exception {
 		Socket socket = new Socket("127.0.0.1", Server.DEFAULT_PORT);
 //		Socket socket = new Socket("wjz", Server.DEFAULT_PORT);
 		socket.setKeepAlive(true);
@@ -79,7 +79,7 @@ public class Client {
 		System.out.println("Sent : " + inMessage);
 		return inMessage;
 	}
-
+	
 	public static InPresence newInPresence() {
 		InPresence inPresence = new InPresence();
 		inPresence.setMid(2);
@@ -123,7 +123,7 @@ public class Client {
 		return inRevise;
 	}
 
-	public static void main0ok(String[] args) {
+	public static void main(String[] args) {
 		InRevise inRevise = newInRevise();
 		System.out.println("inRevise : " + inRevise);
 		OutRevise outRevise = inRevise.toOutPacket();
