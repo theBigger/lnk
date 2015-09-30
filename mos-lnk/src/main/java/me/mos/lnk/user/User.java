@@ -1,5 +1,6 @@
 package me.mos.lnk.user;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -58,10 +59,10 @@ public class User {
 	private String ip;
 
 	/** 经度 */
-	private double lng;
+	private BigDecimal longitude;
 
 	/** 纬度 */
-	private double lat;
+	private BigDecimal latitude;
 
 	/** 用户当前状态 */
 	private String status;
@@ -221,23 +222,23 @@ public class User {
 		this.ip = ip;
 	}
 
-	public double getLng() {
-		return lng;
-	}
+	public BigDecimal getLongitude() {
+        return longitude;
+    }
 
-	public void setLng(double lng) {
-		this.lng = lng;
-	}
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
 
-	public double getLat() {
-		return lat;
-	}
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
 
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
 
-	public String getStatus() {
+    public String getStatus() {
 		return status;
 	}
 
@@ -269,124 +270,127 @@ public class User {
 		this.gmt_modified = gmt_modified;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((avatar == null) ? 0 : avatar.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((extend == null) ? 0 : extend.hashCode());
-		result = prime * result + ((gmt_created == null) ? 0 : gmt_created.hashCode());
-		result = prime * result + ((gmt_modified == null) ? 0 : gmt_modified.hashCode());
-		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(lat);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(lng);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + (int) (mid ^ (mid >>> 32));
-		result = prime * result + ((nick == null) ? 0 : nick.hashCode());
-		result = prime * result + ((party_id == null) ? 0 : party_id.hashCode());
-		result = prime * result + ((passwd == null) ? 0 : passwd.hashCode());
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + ((qq == null) ? 0 : qq.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
-		result = prime * result + ((weixin == null) ? 0 : weixin.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((address == null) ? 0 : address.hashCode());
+        result = prime * result + ((avatar == null) ? 0 : avatar.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((extend == null) ? 0 : extend.hashCode());
+        result = prime * result + ((gmt_created == null) ? 0 : gmt_created.hashCode());
+        result = prime * result + ((gmt_modified == null) ? 0 : gmt_modified.hashCode());
+        result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+        result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
+        result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
+        result = prime * result + (int) (mid ^ (mid >>> 32));
+        result = prime * result + ((nick == null) ? 0 : nick.hashCode());
+        result = prime * result + ((party_id == null) ? 0 : party_id.hashCode());
+        result = prime * result + ((passwd == null) ? 0 : passwd.hashCode());
+        result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+        result = prime * result + ((qq == null) ? 0 : qq.hashCode());
+        result = prime * result + ((status == null) ? 0 : status.hashCode());
+        result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
+        result = prime * result + ((weixin == null) ? 0 : weixin.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (avatar == null) {
-			if (other.avatar != null)
-				return false;
-		} else if (!avatar.equals(other.avatar))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (extend == null) {
-			if (other.extend != null)
-				return false;
-		} else if (!extend.equals(other.extend))
-			return false;
-		if (gmt_created == null) {
-			if (other.gmt_created != null)
-				return false;
-		} else if (!gmt_created.equals(other.gmt_created))
-			return false;
-		if (gmt_modified == null) {
-			if (other.gmt_modified != null)
-				return false;
-		} else if (!gmt_modified.equals(other.gmt_modified))
-			return false;
-		if (ip == null) {
-			if (other.ip != null)
-				return false;
-		} else if (!ip.equals(other.ip))
-			return false;
-		if (Double.doubleToLongBits(lat) != Double.doubleToLongBits(other.lat))
-			return false;
-		if (Double.doubleToLongBits(lng) != Double.doubleToLongBits(other.lng))
-			return false;
-		if (mid != other.mid)
-			return false;
-		if (nick == null) {
-			if (other.nick != null)
-				return false;
-		} else if (!nick.equals(other.nick))
-			return false;
-		if (party_id == null) {
-			if (other.party_id != null)
-				return false;
-		} else if (!party_id.equals(other.party_id))
-			return false;
-		if (passwd == null) {
-			if (other.passwd != null)
-				return false;
-		} else if (!passwd.equals(other.passwd))
-			return false;
-		if (phone == null) {
-			if (other.phone != null)
-				return false;
-		} else if (!phone.equals(other.phone))
-			return false;
-		if (qq == null) {
-			if (other.qq != null)
-				return false;
-		} else if (!qq.equals(other.qq))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		if (telephone == null) {
-			if (other.telephone != null)
-				return false;
-		} else if (!telephone.equals(other.telephone))
-			return false;
-		if (weixin == null) {
-			if (other.weixin != null)
-				return false;
-		} else if (!weixin.equals(other.weixin))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (address == null) {
+            if (other.address != null)
+                return false;
+        } else if (!address.equals(other.address))
+            return false;
+        if (avatar == null) {
+            if (other.avatar != null)
+                return false;
+        } else if (!avatar.equals(other.avatar))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        if (extend == null) {
+            if (other.extend != null)
+                return false;
+        } else if (!extend.equals(other.extend))
+            return false;
+        if (gmt_created == null) {
+            if (other.gmt_created != null)
+                return false;
+        } else if (!gmt_created.equals(other.gmt_created))
+            return false;
+        if (gmt_modified == null) {
+            if (other.gmt_modified != null)
+                return false;
+        } else if (!gmt_modified.equals(other.gmt_modified))
+            return false;
+        if (ip == null) {
+            if (other.ip != null)
+                return false;
+        } else if (!ip.equals(other.ip))
+            return false;
+        if (latitude == null) {
+            if (other.latitude != null)
+                return false;
+        } else if (!latitude.equals(other.latitude))
+            return false;
+        if (longitude == null) {
+            if (other.longitude != null)
+                return false;
+        } else if (!longitude.equals(other.longitude))
+            return false;
+        if (mid != other.mid)
+            return false;
+        if (nick == null) {
+            if (other.nick != null)
+                return false;
+        } else if (!nick.equals(other.nick))
+            return false;
+        if (party_id == null) {
+            if (other.party_id != null)
+                return false;
+        } else if (!party_id.equals(other.party_id))
+            return false;
+        if (passwd == null) {
+            if (other.passwd != null)
+                return false;
+        } else if (!passwd.equals(other.passwd))
+            return false;
+        if (phone == null) {
+            if (other.phone != null)
+                return false;
+        } else if (!phone.equals(other.phone))
+            return false;
+        if (qq == null) {
+            if (other.qq != null)
+                return false;
+        } else if (!qq.equals(other.qq))
+            return false;
+        if (status == null) {
+            if (other.status != null)
+                return false;
+        } else if (!status.equals(other.status))
+            return false;
+        if (telephone == null) {
+            if (other.telephone != null)
+                return false;
+        } else if (!telephone.equals(other.telephone))
+            return false;
+        if (weixin == null) {
+            if (other.weixin != null)
+                return false;
+        } else if (!weixin.equals(other.weixin))
+            return false;
+        return true;
+    }
 }

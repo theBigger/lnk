@@ -28,14 +28,14 @@ public class DefaultMessageProvider implements MessageProvider {
 		private static final MessageProvider MESSAGE_PROVIDER = new DefaultMessageProvider();
 	}
 
-	private static final String SAVE_MESSAGE_SQL = "INSERT INTO `mos-lnk`.`lnk-message` " + "(`mid`, `party_id`, `nick`, `avatar`, `tid`, `body`, `gmt_created`) " + "VALUES "
+	private static final String SAVE_MESSAGE_SQL = "INSERT INTO `mos_lnk`.`lnk_message` " + "(`mid`, `party_id`, `nick`, `avatar`, `tid`, `body`, `gmt_created`) " + "VALUES "
 			+ "(:mid, :party_id, :nick, :avatar, :tid, :body, :gmt_created)";
 
-	private static final String DEL_MESSAGE_SQL = "DELETE FROM `mos-lnk`.`lnk-message` WHERE id = :id;";
+	private static final String DEL_MESSAGE_SQL = "DELETE FROM `mos_lnk`.`lnk_message` WHERE id = :id;";
 
-	private static final String QUERY_MESSAGE_SQL = "SELECT " + "`lnk-message`.`id`, `lnk-message`.`mid`, `lnk-message`.`party_id`, "
-			+ "`lnk-message`.`nick`, `lnk-message`.`avatar`, `lnk-message`.`tid`, "
-			+ "`lnk-message`.`body`, `lnk-message`.`gmt_created` FROM `mos-lnk`.`lnk-message` where `lnk-message`.`tid` = :tid;";
+	private static final String QUERY_MESSAGE_SQL = "SELECT " + "`lnk_message`.`id`, `lnk_message`.`mid`, `lnk_message`.`party_id`, "
+			+ "`lnk_message`.`nick`, `lnk_message`.`avatar`, `lnk_message`.`tid`, "
+			+ "`lnk_message`.`body`, `lnk_message`.`gmt_created` FROM `mos_lnk`.`lnk_message` where `lnk_message`.`tid` = :tid;";
 
 	private DefaultMessageProvider() {
 		super();

@@ -29,54 +29,54 @@ public class DefaultUserProvider implements UserProvider {
 	}
 	
 	private static final String SELECT_SQL = "SELECT "
-			+ "`lnk-user`.`mid`, "
-			+ "`lnk-user`.`party_id`, "
-			+ "`lnk-user`.`nick`, "
-			+ "`lnk-user`.`passwd`, "
-			+ "`lnk-user`.`avatar`, "
-			+ "`lnk-user`.`weixin`, "
-			+ "`lnk-user`.`qq`, "
-			+ "`lnk-user`.`email`, "
-			+ "`lnk-user`.`telephone`, "
-			+ "`lnk-user`.`phone`, "
-			+ "`lnk-user`.`address`, "
-			+ "`lnk-user`.`ip`, "
-			+ "`lnk-user`.`lng`, "
-			+ "`lnk-user`.`lat`, "
-			+ "`lnk-user`.`status`, "
-			+ "`lnk-user`.`extend`, "
-			+ "`lnk-user`.`gmt_created`, "
-			+ "`lnk-user`.`gmt_modified` FROM `mos-lnk`.`lnk-user` WHERE `lnk-user`.`mid` = :mid;";
+			+ "`lnk_user`.`mid`, "
+			+ "`lnk_user`.`party_id`, "
+			+ "`lnk_user`.`nick`, "
+			+ "`lnk_user`.`passwd`, "
+			+ "`lnk_user`.`avatar`, "
+			+ "`lnk_user`.`weixin`, "
+			+ "`lnk_user`.`qq`, "
+			+ "`lnk_user`.`email`, "
+			+ "`lnk_user`.`telephone`, "
+			+ "`lnk_user`.`phone`, "
+			+ "`lnk_user`.`address`, "
+			+ "`lnk_user`.`ip`, "
+			+ "`lnk_user`.`longitude`, "
+			+ "`lnk_user`.`latitude`, "
+			+ "`lnk_user`.`status`, "
+			+ "`lnk_user`.`extend`, "
+			+ "`lnk_user`.`gmt_created`, "
+			+ "`lnk_user`.`gmt_modified` FROM `mos_lnk`.`lnk_user` WHERE `lnk_user`.`mid` = :mid;";
 	
 	private static final String SELECT_ONLINE_SQL = "SELECT "
-			+ "`lnk-user`.`mid`, "
-			+ "`lnk-user`.`party_id`, "
-			+ "`lnk-user`.`nick`, "
-			+ "`lnk-user`.`passwd`, "
-			+ "`lnk-user`.`avatar`, "
-			+ "`lnk-user`.`weixin`, "
-			+ "`lnk-user`.`qq`, "
-			+ "`lnk-user`.`email`, "
-			+ "`lnk-user`.`telephone`, "
-			+ "`lnk-user`.`phone`, "
-			+ "`lnk-user`.`address`, "
-			+ "`lnk-user`.`ip`, "
-			+ "`lnk-user`.`lng`, "
-			+ "`lnk-user`.`lat`, "
-			+ "`lnk-user`.`status`, "
-			+ "`lnk-user`.`extend`, "
-			+ "`lnk-user`.`gmt_created`, "
-			+ "`lnk-user`.`gmt_modified` FROM `mos-lnk`.`lnk-user` WHERE `lnk-user`.`status` = '" + User.ONLINE + "';";
+			+ "`lnk_user`.`mid`, "
+			+ "`lnk_user`.`party_id`, "
+			+ "`lnk_user`.`nick`, "
+			+ "`lnk_user`.`passwd`, "
+			+ "`lnk_user`.`avatar`, "
+			+ "`lnk_user`.`weixin`, "
+			+ "`lnk_user`.`qq`, "
+			+ "`lnk_user`.`email`, "
+			+ "`lnk_user`.`telephone`, "
+			+ "`lnk_user`.`phone`, "
+			+ "`lnk_user`.`address`, "
+			+ "`lnk_user`.`ip`, "
+			+ "`lnk_user`.`longitude`, "
+			+ "`lnk_user`.`latitude`, "
+			+ "`lnk_user`.`status`, "
+			+ "`lnk_user`.`extend`, "
+			+ "`lnk_user`.`gmt_created`, "
+			+ "`lnk_user`.`gmt_modified` FROM `mos_lnk`.`lnk_user` WHERE `lnk_user`.`status` = '" + User.ONLINE + "';";
 	
 	
-	private static final String CREATE_USR_SQL = "INSERT INTO `mos-lnk`.`lnk-user` "
-			+ "(`party_id`, `nick`, `passwd`, `avatar`, `weixin`, `qq`, `email`, `telephone`, `phone`, `address`, `ip`, `lng`, `lat`, `status`, `extend`, `gmt_created`, `gmt_modified`) "
+	private static final String CREATE_USR_SQL = "INSERT INTO `mos_lnk`.`lnk_user` "
+			+ "(`party_id`, `nick`, `passwd`, `avatar`, `weixin`, `qq`, `email`, `telephone`, `phone`, `address`, `ip`, `longitude`, `latitude`, `status`, `extend`, `gmt_created`, `gmt_modified`) "
 			+ "VALUES "
-			+ "(:party_id, :nick, :passwd, :avatar, :weixin, :qq, :email, :telephone, :phone, :address, :ip, :lng, :lat, :status, :extend, :gmt_created, :gmt_modified);";
+			+ "(:party_id, :nick, :passwd, :avatar, :weixin, :qq, :email, :telephone, :phone, :address, :ip, :longitude, :latitude, :status, :extend, :gmt_created, :gmt_modified);";
 
-	private static final String UPDATE_USER_STATUS_SQL = "UPDATE `mos-lnk`.`lnk-user` SET `lnk-user`.`status` = :status, `lnk-user`.`gmt_modified` = NOW() WHERE `lnk-user`.`mid` = :mid;";
+	private static final String UPDATE_USER_STATUS_SQL = "UPDATE `mos_lnk`.`lnk_user` SET `lnk_user`.`status` = :status, `lnk_user`.`gmt_modified` = NOW() WHERE `lnk_user`.`mid` = :mid;";
 	
-	private static final String UPDATE_USER_SQL = "UPDATE `mos-lnk`.`lnk-user` SET "
+	private static final String UPDATE_USER_SQL = "UPDATE `mos_lnk`.`lnk_user` SET "
 			+ "`party_id` = :party_id, "
 			+ "`nick` = :nick, "
 			+ "`passwd` = :passwd, "
@@ -153,8 +153,8 @@ public class DefaultUserProvider implements UserProvider {
 			user.setGmt_created(rs.getDate("gmt_created"));
 			user.setGmt_modified(rs.getDate("gmt_modified"));
 			user.setIp(rs.getString("ip"));
-			user.setLat(rs.getDouble("lat"));
-			user.setLng(rs.getDouble("lng"));
+			user.setLatitude(rs.getBigDecimal("latitude"));
+			user.setLongitude(rs.getBigDecimal("longitude"));
 			user.setNick(rs.getString("nick"));
 			user.setParty_id(rs.getString("party_id"));
 			user.setPasswd(rs.getString("passwd"));
