@@ -13,6 +13,10 @@ public interface GroupMessageProvider {
 	long save(GroupMessage message);
 	
 	List<GroupMessage> queryGroupMessageList(long groupId);
+    
+    List<GroupMessage> queryUserGroupMessageList(long groupId, long tid);
+    
+    List<GroupMessage> queryUserGroupMessageList(long tid);
 	
 	int delete(long id);
 }

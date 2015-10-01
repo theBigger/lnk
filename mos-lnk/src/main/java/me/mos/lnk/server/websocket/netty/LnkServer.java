@@ -16,7 +16,7 @@ import io.netty.handler.logging.LoggingHandler;
 import me.mos.lnk.etc.Profile;
 import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
-import me.mos.lnk.processor.DefaultServerProcessor;
+import me.mos.lnk.processor.BoundServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
 import me.mos.lnk.server.AbstractServer;
 
@@ -48,7 +48,7 @@ public class LnkServer extends AbstractServer {
 			profile = Profile.newInstance();
 			setPort(profile.getPort());
 			setBacklog(profile.getBacklog());
-			setProcessor(new DefaultServerProcessor());
+			setProcessor(new BoundServerProcessor());
 			setParser(new JsonPacketParser());
 			log.error("Config LnkServer Success.");
 		} catch (Exception e) {

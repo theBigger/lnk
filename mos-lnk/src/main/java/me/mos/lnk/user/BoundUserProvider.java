@@ -20,12 +20,12 @@ import me.mos.lnk.database.JdbcTemplateProvider;
  * @version 1.0.0
  * @since 2015年6月2日 下午10:09:05
  */
-public class DefaultUserProvider implements UserProvider {
+public class BoundUserProvider implements UserProvider {
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private static class UserProviderHolder {
-		private static final UserProvider USER_PROVIDER = new DefaultUserProvider();
+		private static final UserProvider USER_PROVIDER = new BoundUserProvider();
 	}
 	
 	private static final String SELECT_SQL = "SELECT "
@@ -92,7 +92,7 @@ public class DefaultUserProvider implements UserProvider {
 			+ "`phone` = :phone, "
 			+ "`gmt_modified` = NOW() WHERE `mid` = :mid";
 	
-	private DefaultUserProvider() {
+	private BoundUserProvider() {
 		super();
 		jdbcTemplate = JdbcTemplateProvider.getJdbcTemplate();
 	}

@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import me.mos.lnk.user.DefaultUserProvider;
+import me.mos.lnk.user.BoundUserProvider;
 import me.mos.lnk.user.User;
 
 /**
@@ -46,7 +46,7 @@ public final class ChannelActiveMonitor implements Runnable {
 						log.error("Channel Active Monitor Running Error.", e);
 					}
 					try {
-						List<User> userList = DefaultUserProvider.getInstance().queryOnline();
+						List<User> userList = BoundUserProvider.getInstance().queryOnline();
 						if (!CollectionUtils.isEmpty(userList)) {
 							for (User user : userList) {
 								long mid = user.getMid();

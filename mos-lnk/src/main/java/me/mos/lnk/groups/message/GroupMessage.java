@@ -24,12 +24,23 @@ public class GroupMessage {
 	
 	/** 消息到达方的组的唯一ID */
 	private long group_id;
+    
+    /** 消息到达方的组的成员的唯一ID */
+    private long tid;
 
 	/** 消息内容体 */
 	private String body;
 
 	/** 消息发送时间 */
 	private long gmt_created;
+
+    public long getTid() {
+        return tid;
+    }
+
+    public void setTid(long tid) {
+        this.tid = tid;
+    }
 
     public long getId() {
         return id;

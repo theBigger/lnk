@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import me.mos.lnk.user.DefaultUserProvider;
+import me.mos.lnk.user.BoundUserProvider;
 
 /**
  * 客户端通道寄存器.
@@ -34,7 +34,7 @@ public class Channels {
 		}
 		try {
 			Channels.channels.put(mid, channel);
-			DefaultUserProvider.getInstance().online(Long.parseLong(mid));
+			BoundUserProvider.getInstance().online(Long.parseLong(mid));
 		} catch (Exception e) {
 			log.error("Online Error.", e);
 		}
@@ -55,7 +55,7 @@ public class Channels {
 		}
 		try {
 			Channels.channels.remove(mid);
-			DefaultUserProvider.getInstance().offline(Long.parseLong(mid));
+			BoundUserProvider.getInstance().offline(Long.parseLong(mid));
 		} catch (Exception e) {
 			log.error("Offline Error.", e);
 		}

@@ -20,12 +20,12 @@ import me.mos.lnk.database.JdbcTemplateProvider;
  * @version 1.0.0
  * @since 2015年6月3日 上午11:54:08
  */
-public class DefaultMessageProvider implements MessageProvider {
+public class BoundMessageProvider implements MessageProvider {
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private static class MessageProviderHolder {
-		private static final MessageProvider MESSAGE_PROVIDER = new DefaultMessageProvider();
+		private static final MessageProvider MESSAGE_PROVIDER = new BoundMessageProvider();
 	}
 
 	private static final String SAVE_MESSAGE_SQL = "INSERT INTO `mos_lnk`.`lnk_message` " + "(`mid`, `party_id`, `nick`, `avatar`, `tid`, `body`, `gmt_created`) " + "VALUES "
@@ -37,7 +37,7 @@ public class DefaultMessageProvider implements MessageProvider {
 			+ "`lnk_message`.`nick`, `lnk_message`.`avatar`, `lnk_message`.`tid`, "
 			+ "`lnk_message`.`body`, `lnk_message`.`gmt_created` FROM `mos_lnk`.`lnk_message` where `lnk_message`.`tid` = :tid;";
 
-	private DefaultMessageProvider() {
+	private BoundMessageProvider() {
 		super();
 		jdbcTemplate = JdbcTemplateProvider.getJdbcTemplate();
 	}

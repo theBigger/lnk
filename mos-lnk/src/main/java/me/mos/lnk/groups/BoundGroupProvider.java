@@ -19,12 +19,12 @@ import me.mos.lnk.database.JdbcTemplateProvider;
  * @version 1.0.0
  * @since 2015年6月2日 下午10:09:05
  */
-public class DefaultGroupProvider implements GroupProvider {
+public class BoundGroupProvider implements GroupProvider {
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private static class GroupProviderHolder {
-		private static final GroupProvider GROUP_PROVIDER = new DefaultGroupProvider();
+		private static final GroupProvider GROUP_PROVIDER = new BoundGroupProvider();
 	}
 	
 	private static final String SELECT_SQL = "SELECT "
@@ -47,7 +47,7 @@ public class DefaultGroupProvider implements GroupProvider {
 			+ "`tags` = :tags, "
 			+ "`gmt_modified` = NOW() WHERE `id` = :id";
 	
-	private DefaultGroupProvider() {
+	private BoundGroupProvider() {
 		super();
 		jdbcTemplate = JdbcTemplateProvider.getJdbcTemplate();
 	}

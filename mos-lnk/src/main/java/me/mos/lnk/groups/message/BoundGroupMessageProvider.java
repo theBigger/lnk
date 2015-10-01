@@ -20,24 +20,37 @@ import me.mos.lnk.database.JdbcTemplateProvider;
  * @version 1.0.0
  * @since 2015年6月3日 上午11:54:08
  */
-public class DefaultGroupMessageProvider implements GroupMessageProvider {
+public class BoundGroupMessageProvider implements GroupMessageProvider {
 
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	private static class MessageProviderHolder {
-		private static final GroupMessageProvider GROUP_MESSAGE_PROVIDER = new DefaultGroupMessageProvider();
+		private static final GroupMessageProvider GROUP_MESSAGE_PROVIDER = new BoundGroupMessageProvider();
 	}
 
-	private static final String SAVE_GROUP_MESSAGE_SQL = "INSERT INTO `mos_lnk`.`lnk_group_message` " + "(`mid`, `party_id`, `nick`, `avatar`, `group_id`, `body`, `gmt_created`) " + "VALUES "
-			+ "(:mid, :party_id, :nick, :avatar, :group_id, :body, :gmt_created)";
+	private static final String SAVE_GROUP_MESSAGE_SQL = "INSERT INTO `mos_lnk`.`lnk_group_message` " + "(`mid`, `party_id`, `nick`, `avatar`, `group_id`, `tid`, `body`, `gmt_created`) " + "VALUES "
+			+ "(:mid, :party_id, :nick, :avatar, :group_id, :tid, :body, :gmt_created)";
 
 	private static final String DEL_GROUP_MESSAGE_SQL = "DELETE FROM `mos_lnk`.`lnk_group_message` WHERE id = :id;";
 
 	private static final String QUERY_GROUP_MESSAGE_SQL = "SELECT " + "`lnk_group_message`.`id`, `lnk_group_message`.`mid`, `lnk_group_message`.`party_id`, "
-			+ "`lnk_group_message`.`nick`, `lnk_group_message`.`avatar`, `lnk_group_message`.`group_id`, "
-			+ "`lnk_group_message`.`body`, `lnk_group_message`.`gmt_created` FROM `mos_lnk`.`lnk_group_message` where `lnk_group_message`.`group_id` = :group_id;";
-	
-	private DefaultGroupMessageProvider() {
+			+ "`lnk_group_message`.`nick`, `lnk_group_message`.`avatar`, `lnk_group_message`.`group_id`, `lnk_group_message`.`tid`, "
+			+ "`lnk_group_message`.`body`, `lnk_group_message`.`gmt_created` FROM `mos_lnk`.`lnk_group_message` WHERE `lnk_group_message`.`group_id` = :group_id;";
+
+    private static final String QUERY_USER_GROUP_MESSAGE_SQL = "SELECT " + "`lnk_group_message`.`id`, `lnk_group_message`.`mid`, `lnk_group_message`.`party_id`, "
+            + "`lnk_group_message`.`nick`, `lnk_group_message`.`avatar`, `lnk_group_message`.`group_id`, `lnk_group_message`.`tid`, "
+            + "`lnk_group_message`.`body`, `lnk_group_message`.`gmt_created` FROM `mos_lnk`.`lnk_group_message` "
+            + "WHERE "
+            + "`lnk_group_message`.`group_id` = :group_id AND "
+            + "lnk_group_message`.`tid` = :tid;";
+    
+    private static final String QUERY_USER_MESSAGE_SQL = "SELECT " + "`lnk_group_message`.`id`, `lnk_group_message`.`mid`, `lnk_group_message`.`party_id`, "
+            + "`lnk_group_message`.`nick`, `lnk_group_message`.`avatar`, `lnk_group_message`.`group_id`, `lnk_group_message`.`tid`, "
+            + "`lnk_group_message`.`body`, `lnk_group_message`.`gmt_created` FROM `mos_lnk`.`lnk_group_message` "
+            + "WHERE "
+            + "lnk_group_message`.`tid` = :tid;";
+    
+	private BoundGroupMessageProvider() {
 		super();
 		jdbcTemplate = JdbcTemplateProvider.getJdbcTemplate();
 	}
@@ -61,6 +74,21 @@ public class DefaultGroupMessageProvider implements GroupMessageProvider {
 	}
 
 	@Override
+    public List<GroupMessage> queryUserGroupMessageList(long groupId, long tid) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("group_id", groupId);
+        paramMap.put("tid", tid);
+        return jdbcTemplate.query(QUERY_USER_GROUP_MESSAGE_SQL, paramMap, new GroupMessageMapper());
+    }
+
+    @Override
+    public List<GroupMessage> queryUserGroupMessageList(long tid) {
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("tid", tid);
+        return jdbcTemplate.query(QUERY_USER_MESSAGE_SQL, paramMap, new GroupMessageMapper());
+    }
+
+    @Override
 	public int delete(long id) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("id", id);

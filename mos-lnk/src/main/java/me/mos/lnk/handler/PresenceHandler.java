@@ -6,8 +6,10 @@ import org.springframework.util.CollectionUtils;
 
 import me.mos.lnk.channel.Channel;
 import me.mos.lnk.channel.Channels;
+import me.mos.lnk.groups.message.GroupMessage;
 import me.mos.lnk.message.Message;
 import me.mos.lnk.packet.InPresence;
+import me.mos.lnk.packet.OutGroupMessage;
 import me.mos.lnk.packet.OutMessage;
 import me.mos.lnk.packet.OutPacket;
 import me.mos.lnk.packet.OutPresence;
@@ -29,17 +31,34 @@ public class PresenceHandler extends AbstractPacketHandler<InPresence> {
 			Channels.online(channel);
 			// 我出席了之后 拉取我的离线消息
 			List<Message> offlineMessageList = messageProvider.queryMessageList(packet.getMid());
-			if (CollectionUtils.isEmpty(offlineMessageList)) {
-				return outPresence;
+			if (!CollectionUtils.isEmpty(offlineMessageList)) {
+			    for (Message message : offlineMessageList) {
+	                if (message == null) {
+	                    continue;
+	                }
+	                OutMessage outMessage = message.toOutMessage();
+	                channel.deliver(outMessage.ok());
+	                messageProvider.delete(message.getId());
+	            }
 			}
-			for (Message message : offlineMessageList) {
-				if (message == null) {
-					continue;
-				}
-				OutMessage outMessage = message.toOutMessage();
-				channel.deliver(outMessage);
-				messageProvider.delete(message.getId());
-			}
+			List<GroupMessage> offlineGroupMessageList = groupMessageProvider.queryUserGroupMessageList(packet.getMid());
+			if (!CollectionUtils.isEmpty(offlineGroupMessageList)) {
+                for (GroupMessage message : offlineGroupMessageList) {
+                    if (message == null) {
+                        continue;
+                    }
+                    OutGroupMessage outMessage = new OutGroupMessage();
+                    outMessage.setBody(message.getBody());
+                    outMessage.setGmt_created(message.getGmt_created());
+                    outMessage.setMid(message.getMid());
+                    outMessage.setGroupId(message.getGroup_id());
+                    outMessage.setAvatar(message.getAvatar());
+                    outMessage.setNick(message.getNick());
+                    outMessage.setParty_id(message.getParty_id());
+                    channel.deliver(outMessage.ok());
+                    groupMessageProvider.delete(message.getId());
+                }
+            }
 		} catch (Exception e) {
 			log.error("Presence Processing Error.", e);
 			return outPresence.err();

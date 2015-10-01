@@ -18,7 +18,7 @@ import me.mos.lnk.packet.InPacket;
 import me.mos.lnk.packet.OutPacket;
 import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
-import me.mos.lnk.processor.DefaultServerProcessor;
+import me.mos.lnk.processor.BoundServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
 import me.mos.lnk.server.Handler;
 import me.mos.lnk.server.Server;
@@ -42,7 +42,7 @@ public class ServerIoHandler implements Handler {
 
 	public ServerIoHandler() {
 		super();
-		processor = new DefaultServerProcessor();
+		processor = new BoundServerProcessor();
 		parser = new JsonPacketParser();
 	}
 

@@ -22,6 +22,8 @@ public interface Alias {
     
     String GROUP_NAME = "group";
     
+    String JOIN_GROUP_NAME = "join-group";
+    
     String GROUP_MESSAGE_NAME = "group-message";
 	
 	String ACKNOWLEDGE_NAME = "ack";

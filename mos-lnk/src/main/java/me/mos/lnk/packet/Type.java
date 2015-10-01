@@ -17,7 +17,8 @@ public enum Type {
 	Revise((byte) 6),
 	PushId((byte) 7),
     Group((byte) 8),
-    GroupMessage((byte) 9)
+    GroupMessage((byte) 9),
+    JoinGroup((byte) 10)
 	;
 
 	public final byte type;

@@ -4,6 +4,7 @@ import me.mos.lnk.channel.Channel;
 import me.mos.lnk.handler.GroupHandler;
 import me.mos.lnk.handler.GroupMessageHandler;
 import me.mos.lnk.handler.IQHandler;
+import me.mos.lnk.handler.JoinGroupHandler;
 import me.mos.lnk.handler.MessageHandler;
 import me.mos.lnk.handler.PresenceHandler;
 import me.mos.lnk.handler.PushIdHandler;
@@ -12,6 +13,7 @@ import me.mos.lnk.handler.ReviseHandler;
 import me.mos.lnk.packet.InGroup;
 import me.mos.lnk.packet.InGroupMessage;
 import me.mos.lnk.packet.InIQ;
+import me.mos.lnk.packet.InJoinGroup;
 import me.mos.lnk.packet.InMessage;
 import me.mos.lnk.packet.InPacket;
 import me.mos.lnk.packet.InPresence;
@@ -28,7 +30,7 @@ import me.mos.lnk.packet.OutPacket;
  * @version 1.0.0
  * @since 2015年6月2日 上午12:44:18
  */
-public class DefaultServerProcessor implements ServerProcessor {
+public class BoundServerProcessor implements ServerProcessor {
 
 	private IQHandler iqHandler;
 
@@ -45,8 +47,10 @@ public class DefaultServerProcessor implements ServerProcessor {
     private GroupHandler groupHandler;
     
     private GroupMessageHandler groupMessageHandler;
+    
+    private JoinGroupHandler joinGroupHandler;
 
-	public DefaultServerProcessor() {
+	public BoundServerProcessor() {
 		super();
 		iqHandler = new IQHandler();
 		messageHandler = new MessageHandler();
@@ -56,6 +60,7 @@ public class DefaultServerProcessor implements ServerProcessor {
 		pushIdHandler = new PushIdHandler();
 		groupHandler = new GroupHandler();
 		groupMessageHandler = new GroupMessageHandler();
+		joinGroupHandler = new JoinGroupHandler();
 	}
 
 	@Override
@@ -85,6 +90,9 @@ public class DefaultServerProcessor implements ServerProcessor {
             break;
         case GroupMessage:
             outPacket = groupMessageHandler.process(channel, (InGroupMessage) packet);
+            break;
+        case JoinGroup:
+            outPacket = joinGroupHandler.process(channel, (InJoinGroup) packet);
             break;
 		default:
 			break;

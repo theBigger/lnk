@@ -17,7 +17,7 @@ import me.mos.lnk.channel.ChannelActiveMonitor;
 import me.mos.lnk.etc.Profile;
 import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
-import me.mos.lnk.processor.DefaultServerProcessor;
+import me.mos.lnk.processor.BoundServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
 import me.mos.lnk.server.AbstractServer;
 import me.mos.lnk.server.netty.codec.PacketProtocolDecoder;
@@ -54,7 +54,7 @@ public class LnkServer extends AbstractServer {
 			setPort(profile.getPort() + 1);
 			setBacklog(profile.getBacklog());
 			setCharset(profile.getCharset());
-			setProcessor(new DefaultServerProcessor());
+			setProcessor(new BoundServerProcessor());
 			setParser(new JsonPacketParser());
 			log.error("Config LnkServer Success.");
 		} catch (Exception e) {

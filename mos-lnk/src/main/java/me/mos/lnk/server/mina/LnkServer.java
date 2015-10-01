@@ -16,7 +16,7 @@ import me.mos.lnk.etc.Profile;
 import me.mos.lnk.executor.LnkExecutor;
 import me.mos.lnk.parser.JsonPacketParser;
 import me.mos.lnk.parser.PacketParser;
-import me.mos.lnk.processor.DefaultServerProcessor;
+import me.mos.lnk.processor.BoundServerProcessor;
 import me.mos.lnk.processor.ServerProcessor;
 import me.mos.lnk.server.AbstractServer;
 import me.mos.lnk.server.mina.codec.PacketProtocolCodecFilter;
@@ -68,7 +68,7 @@ public class LnkServer extends AbstractServer {
 			setBacklog(profile.getBacklog());
 			setIdleTime(profile.getIdleTime());
 			setCharset(profile.getCharset());
-			setProcessor(new DefaultServerProcessor());
+			setProcessor(new BoundServerProcessor());
 			setParser(new JsonPacketParser());
 			IoBuffer.setUseDirectBuffer(false);
 			IoBuffer.setAllocator(new SimpleBufferAllocator());

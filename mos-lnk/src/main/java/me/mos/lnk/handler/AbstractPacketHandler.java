@@ -3,14 +3,16 @@ package me.mos.lnk.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import me.mos.lnk.groups.DefaultGroupProvider;
+import me.mos.lnk.groups.BoundGroupProvider;
 import me.mos.lnk.groups.GroupProvider;
-import me.mos.lnk.groups.message.DefaultGroupMessageProvider;
+import me.mos.lnk.groups.join.BoundJoinGroupProvider;
+import me.mos.lnk.groups.join.JoinGroupProvider;
+import me.mos.lnk.groups.message.BoundGroupMessageProvider;
 import me.mos.lnk.groups.message.GroupMessageProvider;
-import me.mos.lnk.message.DefaultMessageProvider;
+import me.mos.lnk.message.BoundMessageProvider;
 import me.mos.lnk.message.MessageProvider;
 import me.mos.lnk.packet.InPacket;
-import me.mos.lnk.user.DefaultUserProvider;
+import me.mos.lnk.user.BoundUserProvider;
 import me.mos.lnk.user.UserProvider;
 
 /**
@@ -30,12 +32,15 @@ public abstract class AbstractPacketHandler<I extends InPacket> implements Packe
     protected GroupProvider groupProvider;
     
     protected GroupMessageProvider groupMessageProvider;
+    
+    protected JoinGroupProvider joinGroupProvider;
 
 	public AbstractPacketHandler() {
 		super();
-		messageProvider = DefaultMessageProvider.getInstance();
-		userProvider = DefaultUserProvider.getInstance();
-		groupProvider = DefaultGroupProvider.getInstance();
-		groupMessageProvider = DefaultGroupMessageProvider.getInstance();
+		messageProvider = BoundMessageProvider.getInstance();
+		userProvider = BoundUserProvider.getInstance();
+		groupProvider = BoundGroupProvider.getInstance();
+		groupMessageProvider = BoundGroupMessageProvider.getInstance();
+		joinGroupProvider = BoundJoinGroupProvider.getInstance();
 	}
 }

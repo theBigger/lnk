@@ -3,6 +3,7 @@ package me.mos.lnk.parser;
 import me.mos.lnk.packet.InGroup;
 import me.mos.lnk.packet.InGroupMessage;
 import me.mos.lnk.packet.InIQ;
+import me.mos.lnk.packet.InJoinGroup;
 import me.mos.lnk.packet.InMessage;
 import me.mos.lnk.packet.InPacket;
 import me.mos.lnk.packet.InPresence;
@@ -45,6 +46,8 @@ public abstract class AbstractPacketParser implements PacketParser {
             return SerializerProvider.deserialize(InGroup.class, packet);
         case GroupMessage:
             return SerializerProvider.deserialize(InGroupMessage.class, packet);
+        case JoinGroup:
+            return SerializerProvider.deserialize(InJoinGroup.class, packet);
 		default:
 			throw new IllegalStateException("Error Type of Packet " + packet);
 		}
