@@ -40,15 +40,15 @@ public class BoundGroupMessageProvider implements GroupMessageProvider {
     private static final String QUERY_USER_GROUP_MESSAGE_SQL = "SELECT " + "`lnk_group_message`.`id`, `lnk_group_message`.`mid`, `lnk_group_message`.`party_id`, "
             + "`lnk_group_message`.`nick`, `lnk_group_message`.`avatar`, `lnk_group_message`.`group_id`, `lnk_group_message`.`tid`, "
             + "`lnk_group_message`.`body`, `lnk_group_message`.`gmt_created` FROM `mos_lnk`.`lnk_group_message` "
-            + "WHERE "
+            + " WHERE "
             + "`lnk_group_message`.`group_id` = :group_id AND "
-            + "lnk_group_message`.`tid` = :tid;";
+            + "`lnk_group_message`.`tid` = :tid;";
     
     private static final String QUERY_USER_MESSAGE_SQL = "SELECT " + "`lnk_group_message`.`id`, `lnk_group_message`.`mid`, `lnk_group_message`.`party_id`, "
             + "`lnk_group_message`.`nick`, `lnk_group_message`.`avatar`, `lnk_group_message`.`group_id`, `lnk_group_message`.`tid`, "
             + "`lnk_group_message`.`body`, `lnk_group_message`.`gmt_created` FROM `mos_lnk`.`lnk_group_message` "
-            + "WHERE "
-            + "lnk_group_message`.`tid` = :tid;";
+            + " WHERE "
+            + "`lnk_group_message`.`tid` = :tid;";
     
 	private BoundGroupMessageProvider() {
 		super();

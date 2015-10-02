@@ -37,7 +37,7 @@ public class JoinGroupHandler extends AbstractPacketHandler<InJoinGroup> {
                     break;
             }
         } catch (Exception e) {
-            log.error("Join Group[" + packet.getGroup_id() + "] Error.", e);
+            log.error("Join Group[" + packet.getGroup_id() + "] Error.\n" + " InJoinGroup : " + packet, e);
         }
 		return outMessage.err();
 	}

@@ -27,6 +27,7 @@ public class ReviseHandler extends AbstractPacketHandler<InRevise> {
 			user.merge(packet);
 			userProvider.update(user);
 		} catch (Exception e) {
+		    log.error("Handler Revise Error.\n" + " InRevise : " + packet, e);
 			outRevise.err();
 		}
 		return outRevise;

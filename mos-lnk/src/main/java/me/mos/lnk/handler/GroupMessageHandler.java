@@ -33,25 +33,30 @@ public class GroupMessageHandler extends AbstractPacketHandler<InGroupMessage> {
         outMessage.setAvatar(user.getAvatar());
         outMessage.setNick(user.getNick());
         outMessage.setParty_id(user.getParty_id());
-        List<Long> mids = joinGroupProvider.getUserInGroup(packet.getGroupId());
-        if (!CollectionUtils.isEmpty(mids)) {
-            for (Long mid : mids) {
-                Channel<?> peerChannel = Channels.channel(String.valueOf(mid));
-                if (peerChannel == null || !peerChannel.isConnect()) {
-                    GroupMessage message = new GroupMessage();
-                    message.setAvatar(outMessage.getAvatar());
-                    message.setBody(outMessage.getBody());
-                    message.setGmt_created(outMessage.getGmt_created());
-                    message.setMid(outMessage.getMid());
-                    message.setNick(outMessage.getNick());
-                    message.setParty_id(outMessage.getParty_id());
-                    message.setTid(mid);
-                    message.setGroup_id(packet.getGroupId());
-                    groupMessageProvider.save(message);
-                    continue;
+        try {
+            List<Long> mids = joinGroupProvider.getUserInGroup(packet.getGroupId());
+            if (!CollectionUtils.isEmpty(mids)) {
+                for (Long mid : mids) {
+                    Channel<?> peerChannel = Channels.channel(String.valueOf(mid));
+                    if (peerChannel == null || !peerChannel.isConnect()) {
+                        GroupMessage message = new GroupMessage();
+                        message.setAvatar(outMessage.getAvatar());
+                        message.setBody(outMessage.getBody());
+                        message.setGmt_created(outMessage.getGmt_created());
+                        message.setMid(outMessage.getMid());
+                        message.setNick(outMessage.getNick());
+                        message.setParty_id(outMessage.getParty_id());
+                        message.setTid(mid);
+                        message.setGroup_id(packet.getGroupId());
+                        groupMessageProvider.save(message);
+                        continue;
+                    }
+                    peerChannel.deliver(outMessage);
                 }
-                peerChannel.deliver(outMessage);
             }
+        } catch (Exception e) {
+            log.error("Handler GroupMessage Error.\n" + " InGroupMessage : " + packet, e);
+            return new Acknowledge(packet.getMid()).err();
         }
         return new Acknowledge(packet.getMid()).ok();
     }

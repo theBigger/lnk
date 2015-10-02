@@ -33,8 +33,8 @@ public class BoundJoinGroupProvider implements JoinGroupProvider {
             + "`lnk_join_group`.`group_id` "
             + "`lnk_join_group`.`mid` "
             + "`lnk_join_group`.`gmt_created` "
-	        + "FROM `mos_lnk`.`lnk_join_group` "
-	        + "WHERE "
+	        + " FROM `mos_lnk`.`lnk_join_group` "
+	        + " WHERE "
 	        + "`lnk_join_group`.`group_id` = :group_id AND "
 	        + "`lnk_join_group`.`mid` = :mid;";
 	

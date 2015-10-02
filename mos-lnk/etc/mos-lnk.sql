@@ -51,6 +51,7 @@ CREATE TABLE `lnk_group_message` (
   `nick` varchar(128) NOT NULL COMMENT '发起报文的用户昵称',
   `avatar` varchar(256) DEFAULT NULL COMMENT '发起报文的用户头像',
   `group_id` bigint(20) NOT NULL COMMENT '消息到达方的聊天组的唯一ID',
+  `tid` bigint(20) NOT NULL COMMENT '消息到达方的用户的唯一ID',
   `body` varchar(2048) NOT NULL COMMENT '消息内容体',
   `gmt_created` bigint(20) NOT NULL COMMENT '消息发送时间',
   PRIMARY KEY (`id`),
@@ -71,6 +72,18 @@ CREATE TABLE `lnk_group` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `owner_mid` (`owner_mid`),
+  KEY `time` (`gmt_created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `lnk_join_group` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `group_id` bigint(20) NOT NULL COMMENT '聊天组唯一ID',
+  `mid` bigint(20) NOT NULL COMMENT '用户的唯一ID',
+  `gmt_created` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `group_id` (`group_id`),
+  KEY `mgid` (`mid`,`group_id`),
   KEY `time` (`gmt_created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

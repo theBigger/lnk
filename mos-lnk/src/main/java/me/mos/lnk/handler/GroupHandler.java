@@ -28,7 +28,7 @@ public class GroupHandler extends AbstractPacketHandler<InGroup> {
             groupId = groupProvider.save(group);
             outGroup.setGroupId(groupId);
         } catch (Exception e) {
-            log.error("Start Group Error.", e);
+            log.error("Start Group Error.\n" + " InGroup : " + packet, e);
             return outGroup.err();
         }
 		return groupId > 0L ? outGroup.ok() : outGroup.err();

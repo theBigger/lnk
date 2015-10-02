@@ -21,20 +21,25 @@ public class MessageHandler extends AbstractPacketHandler<InMessage> {
 
 	@Override
 	public OutPacket process(Channel<?> channel, InMessage packet) throws Throwable {
-		User user = userProvider.query(packet.getMid());
-		if (user == null) {
-			return new Acknowledge(packet.getMid()).meNotExist();
-		}
-		OutMessage outMessage = packet.toOutPacket();
-		outMessage.setAvatar(user.getAvatar());
-		outMessage.setNick(user.getNick());
-		outMessage.setParty_id(user.getParty_id());
-		Channel<?> peerChannel = Channels.channel(String.valueOf(packet.getTid()));
-		if (peerChannel == null || !peerChannel.isConnect()) {
-			messageProvider.save(Message.newInstance(outMessage));
-			return new Acknowledge(packet.getMid()).peerOffline();
-		}
-		peerChannel.deliver(outMessage);
+		try {
+            User user = userProvider.query(packet.getMid());
+            if (user == null) {
+            	return new Acknowledge(packet.getMid()).meNotExist();
+            }
+            OutMessage outMessage = packet.toOutPacket();
+            outMessage.setAvatar(user.getAvatar());
+            outMessage.setNick(user.getNick());
+            outMessage.setParty_id(user.getParty_id());
+            Channel<?> peerChannel = Channels.channel(String.valueOf(packet.getTid()));
+            if (peerChannel == null || !peerChannel.isConnect()) {
+            	messageProvider.save(Message.newInstance(outMessage));
+            	return new Acknowledge(packet.getMid()).peerOffline();
+            }
+            peerChannel.deliver(outMessage);
+        } catch (Exception e) {
+            log.error("Handler Message Error.\n" + " InMessage : " + packet, e);
+            return new Acknowledge(packet.getMid()).ok();
+        }
 		return new Acknowledge(packet.getMid()).ok();
 	}
 }

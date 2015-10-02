@@ -60,7 +60,7 @@ public class PresenceHandler extends AbstractPacketHandler<InPresence> {
                 }
             }
 		} catch (Exception e) {
-			log.error("Presence Processing Error.", e);
+			log.error("Presence Processing Error.\n" + " InPresence : " + packet, e);
 			return outPresence.err();
 		}
 		return outPresence;

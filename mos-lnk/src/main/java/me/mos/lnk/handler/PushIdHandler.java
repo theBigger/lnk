@@ -22,7 +22,7 @@ public class PushIdHandler extends AbstractPacketHandler<InPushId> {
         try {
             ret = userProvider.uploadPushId(packet.getMid(), packet.getPush_id());
         } catch (Exception e) {
-            log.error("Upload Push ID Error.", e);
+            log.error("Upload Push ID Error.\n" + " InPushId : " + packet, e);
             return outPushId.err();
         }
 		return ret > 0 ? outPushId.ok() : outPushId.err();
