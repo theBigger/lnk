@@ -8,8 +8,14 @@
 		<jetty-version>9.3.1.v20150714</jetty-version>
 		<slf4j-version>1.7.12</slf4j-version>
 		<jar.main.class>me.mos.lnk.server.ServerStarter</jar.main.class>
+		<elasticsearch-version>2.0.0-rc1</elasticsearch-version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>${elasticsearch-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.websocket</groupId>
 			<artifactId>javax.websocket-api</artifactId>
